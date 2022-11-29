@@ -5,14 +5,7 @@ input {
   width: 100%;
   padding-left: 30px;
   border-radius: 5px;
-  &[type="submit"] {
-    background-color: $color-blue-100;
-    color: $color-white;
-    font-weight: 500;
-    padding-left: 0 !important;
-    text-align: center;
-    cursor: pointer;
-  }
+  
   &[type="password"] {
     padding-right: 10px;
   }
@@ -31,4 +24,23 @@ label {
     height: 20px;
     color: $color-blue-900;
   }
+  .error-name{
+    font-size:12px;
+    margin-top:4px;
+    text-align:right;
+    color: $color-error;
+  }
+}
+
+button[type="submit"]{
+  background-color: $color-blue-100;
+  color: $color-white;
+  font-weight: 500;
+  padding-left: 0 !important;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:40px;
+  border-radius:5px;
+  cursor: pointer;
 }

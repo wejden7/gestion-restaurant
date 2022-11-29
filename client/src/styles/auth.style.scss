@@ -21,8 +21,9 @@
     form {
       display: flex;
       flex-direction: column;
+      margin-top: 20px;
       gap: 20px;
-      .forgot-password{
+      .forgot-password {
         color: white;
         text-align: right;
         font-size: 14px;
@@ -35,7 +36,7 @@
     }
     .sousTitle-form {
       color: rgb(207, 207, 207);
-      margin-bottom: 20px;
+
       font-size: 14px;
     }
     .have-not-account {
@@ -44,6 +45,58 @@
       text-align: center;
       margin-top: 20px;
     }
+    .error-form {
+      margin-top: 4px;
+      color: $color-error;
+      font-size: 14px;
+    }
+  }
+  .content-success {
+    display: grid;
+    justify-content: center;
+    .success-top {
+      padding: 20px;
+      width: 350px;
+      border-radius: 5px 5px 0 0;
+      background-color: $color-pink-100;
+      display: grid;
+      justify-content: center;
+      .register-success-icon {
+        color: $color-blue-100;
+        font-size: 60px;
+      }
+      &::after {
+        content: "success";
+        font-size: 16px;
+        color: $color-blue-100;
+      }
+    }
+    .success-bottom {
+      background: $color-blue-100;
+      border-radius: 0 0 5px 5px;
+      display: grid;
+      padding: 20px;
+      justify-items: center;
+      gap: 20px;
+      .text {
+        text-align: center;
+        color: $color-pink-100;
+        width: 300px;
+      }
+      button{
+        background-color: $color-blue-900;
+        padding: 8px 40px;
+        border-radius: 20px;
+        color:white;
+        font-weight: 500;
+        max-width: max-content;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out 0s;
+        &:hover{
+          transform: translateY(-7px);
+        }
+      }
+
+    }
   }
 }
-
