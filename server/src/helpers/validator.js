@@ -23,11 +23,7 @@ export const registerValidatore = [
     .isLength({ min: 4 })
     .withMessage("Name must contain at least 4 characters"),
 
-  check("type")
-    .notEmpty()
-    .withMessage("type is required")
-    .isIn(["admin", "employee"])
-    .withMessage("Type must contain admin or employee"),
+ 
 
   check("email")
     .notEmpty()
@@ -43,6 +39,11 @@ export const registerValidatore = [
     .matches(/\d/)
     .withMessage("Password must contain a number"),
 ];
+/** check("type")
+    .notEmpty()
+    .withMessage("type is required")
+    .isIn(["admin", "employee"])
+    .withMessage("Type must contain admin or employee"), */
 
 export const emailValidatore = [
   check("email")

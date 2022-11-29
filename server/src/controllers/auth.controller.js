@@ -17,11 +17,11 @@ export const registerController = async (req, res, next) => {
 
   try {
     const user = await userModel.findOne({ email });
-    if (user) return next(` User with ${email} already exists`);
+    if (user) return next(` This email already exists`);
 
     const salt = bcrypt.genSaltSync(10);
     req.body.password = bcrypt.hashSync(password, salt);
-
+    req.body.type="admin"
     const newUser = await userModel.create(req.body);
 
     const token = createToken(newUser);
