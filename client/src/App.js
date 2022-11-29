@@ -1,22 +1,13 @@
 
-import './App.css';
+import './App.scss';
+import {Link,Outlet} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p className="font-bold text-black">
-          Edit <code>src/App.js</code> and save to reload.5
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Link to="register">register</Link>
+     
+     
     </div>
   );
 }
