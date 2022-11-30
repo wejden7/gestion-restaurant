@@ -2,10 +2,13 @@ import React from "react";
 import { Input } from "../components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import useLogin from "Hooks/UseLogin";
 import "styles/auth.style.scss";
 const { EmailInput, PasswordInput, SubmitInput } = Input;
 
 function Login() {
+  const { register, onSubmit, errors, isSubmitting, error,success } = useLogin();
+
   return (
     <div className="body">
       <motion.div
@@ -16,11 +19,14 @@ function Login() {
       >
         <h1 className="title-form">Sign In</h1>
         <p className="sousTitle-form">welcome back to tacPro</p>
-        <form>
-          <EmailInput />
-          <PasswordInput />
+        <p className="error-form">{error}</p>
+        <form onSubmit={onSubmit}>
+          <EmailInput register={register("email")}
+          error={errors.email?.message} />
+          <PasswordInput  register={register("password")}
+          error={errors.password?.message} />
           <Link className="forgot-password">Forgot password ?</Link>
-          <SubmitInput />
+          <SubmitInput isSubmitting={isSubmitting} />
         </form>
         <p className="have-not-account">
           Don't have an account? <Link to="/register">Sign Up</Link>{" "}

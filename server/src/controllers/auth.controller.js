@@ -44,7 +44,7 @@ export const loginController = async (req, res, next) => {
 
   try {
     const user = await userModel.findOne({ email });
-    if (!user) return next(` Login with ${email} not found`);
+    if (!user) return next(` Email not found`);
 
     if (!bcrypt.compareSync(password, user.password))
       return next("incorrect password");
