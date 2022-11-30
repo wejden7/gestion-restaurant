@@ -1,0 +1,42 @@
+import React,{useEffect} from 'react'
+import { Input } from "../components";
+import { Link, useLocation,useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import useVerificationCode from 'Hooks/UseVerificationCode';
+const { TextInputCode , SubmitInput } = Input;
+
+function VerificationCode() {
+    const {state}= useLocation()
+    const navigate = useNavigate()
+    console.log(state)
+    useEffect(()=>{
+        if(!state)
+        navigate('/login')
+    },[state])
+   
+    const { register, onSubmit, errors, isSubmitting, error, success} =useVerificationCode(state?.email);
+  return (
+   <div className="body">
+    <motion.div
+        initial={{ opacity: 0.5 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }} className="content">
+    <h1 className="title-form">Verifivation Code</h1>
+        <p className="sousTitle-form">Consultez votre boite mail and entre code de verification. cet code valble 1h </p>
+        <p className="error-form">{error}</p>
+        <form onSubmit={onSubmit}>
+            <TextInputCode register={register("code")} error={errors.code?.message}/>
+            <SubmitInput label="Send" isSubmitting={isSubmitting}/>
+        </form>
+        <p className="have-not-account">
+        Already have an account ? <Link to="/login">Sign In</Link>
+      </p>
+      <p className="have-not-account">
+          Don't have an account? <Link to="/register">Sign Up</Link>{" "}
+        </p>
+    </motion.div>
+   </div>
+  )
+}
+
+export default VerificationCode

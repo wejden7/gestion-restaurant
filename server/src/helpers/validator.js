@@ -64,8 +64,6 @@ export const verificationCodeValidatore = [
   check("code")
   .notEmpty()
   .withMessage("Email is required")
-  .isLength({ min: 4 ,max:4})
-  .withMessage("Code must contain 4 characters")
 ]
 
 export const updatePasswordValidatore = [

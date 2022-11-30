@@ -2,43 +2,40 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { login } from "state/AuthSlice";
-import { useDispatch } from "react-redux";
+import { verificationCodeApi } from "apis/auth.api";
+import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email().required("Email is reqired"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(8, "should be 8 chars minimum. "),
+  code: Yup.string().required("Code is reqired"),
 });
 
-const user = {
-  email: "",
-  password: "",
+const defaultCode = {
+  code: "",
 };
 const formOption = {
   resolver: yupResolver(validationSchema),
-  defaultValues: user,
+  defaultValues: defaultCode,
 };
-export default function useLogin() {
+
+export default function useVerificationCode(email) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const { register, handleSubmit, formState, reset } = useForm(formOption);
   const { errors, isSubmitting } = formState;
-  const dispatch = useDispatch()
-
-  const onSubmit = handleSubmit(async (data,e) => {
-    e.preventDefault();
-     dispatch(login(data))
-      .unwrap()
+  const navigate = useNavigate();
+  const onSubmit = handleSubmit(async (data) => {
+    data.email = email;
+    console.log(data)
+    await verificationCodeApi(data)
       .then((resualt) => {
         console.log(resualt);
+        navigate("/update-password",{state:{token:resualt.token}})
         setSuccess(true);
         reset();
         setError(null);
       })
       .catch((error) => {
         console.log(error);
-        setError(error.message);
+        setError(error.errors);
       });
   });
 

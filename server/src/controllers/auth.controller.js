@@ -79,7 +79,7 @@ export const forgotPasswordController = async (req, res, next) => {
 
     await sendMail(user.email, code);
 
-    return res.status(200).json({ message: "email code send successfully" });
+    return res.status(200).json({ message: "email code send successfully",data: user.email});
   } catch (error) {
     return next(error.message);
   }
@@ -93,7 +93,7 @@ export const verificationCodeController = async (req, res, next) => {
 
   try {
     const user = await userModel.findOne({ email, code });
-    if (!user) return next("email or code not valide");
+    if (!user) return next("Code not valide, merci de réessayer");
 
     const hour = durationHourUpdate(user.updatedDate);
     if (hour < 1) {

@@ -21,17 +21,18 @@
     form {
       display: flex;
       flex-direction: column;
-      margin-top: 20px;
+      margin: 20px 0;
       gap: 20px;
-      .forgot-password {
-        color: white;
-        text-align: right;
-        font-size: 14px;
-      }
+     
+    }
+    .forgot-password {
+      color: white;
+      text-align: center;
+      font-size: 12px;
     }
     .title-form {
       color: $color-pink-100;
-      font-size: 40px;
+      font-size: 36px;
       font-weight: bold;
     }
     .sousTitle-form {
@@ -43,7 +44,7 @@
       color: white;
       font-size: 12px;
       text-align: center;
-      margin-top: 20px;
+      margin-bottom: 8px;
     }
     .error-form {
       margin-top: 4px;
