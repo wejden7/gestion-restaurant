@@ -69,7 +69,7 @@ export const forgotPasswordController = async (req, res, next) => {
 
   try {
     const user = await userModel.findOne({ email });
-    if (!user) return next("user not found");
+    if (!user) return next("L’adresse mail est inconnue");
 
     const code = randomString(4);
 
@@ -132,7 +132,7 @@ export const updatePasswordController = async (req, res, next) => {
 
 export const handleError = async (error, req, res, next) => {
   return res.status(500).json({
-    message: "",
+    message: "La connexion a échouée, merci de réessayer",
     errors: error,
   });
 };
