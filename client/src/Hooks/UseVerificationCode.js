@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { verificationCodeApi } from "apis/auth.api";
+import { verificationCodeApi } from "utils/apis/auth.api";
 import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
   code: Yup.string().required("Code is reqired"),
@@ -24,11 +24,11 @@ export default function useVerificationCode(email) {
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
     data.email = email;
-    console.log(data)
+    console.log(data);
     await verificationCodeApi(data)
       .then((resualt) => {
         console.log(resualt);
-        navigate("/update-password",{state:{token:resualt.token}})
+        navigate("/update-password", { state: { token: resualt.token } });
         setSuccess(true);
         reset();
         setError(null);

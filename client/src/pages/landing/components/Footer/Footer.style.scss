@@ -1,0 +1,14 @@
+@import 'utils/styles/colors';
+.footer{
+    width: 100%;
+    border-top: gainsboro 0.5px solid ;
+    color: $color-blue-100;
+    font-size: 16px;
+    font-weight: 400;
+    padding:30px 0 30px 150px;
+    display: flex; 
+    gap: 30px;
+    p{
+        font-weight: 500;
+    }
+}

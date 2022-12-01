@@ -1,15 +1,9 @@
-
-import './App.scss';
-import {Link,Outlet} from 'react-router-dom'
+import "./App.scss";
+import { RouterProvider } from "react-router-dom";
+import router from "utils/router.utils";
 
 function App() {
-  return (
-    <div className="">
-      <Link to="register">register</Link>
-     
-     
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

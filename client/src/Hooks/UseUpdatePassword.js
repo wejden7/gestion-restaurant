@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import {updatePasswordCodeApi  } from "apis/auth.api";
+import { updatePasswordCodeApi } from "utils/apis/auth.api";
 import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
-    password:  Yup.string()
+  password: Yup.string()
     .required("Password is required")
     .min(8, "should be 8 chars minimum. "),
 });
 
 const defaultPassword = {
-    password: "",
+  password: "",
 };
 const formOption = {
   resolver: yupResolver(validationSchema),
@@ -25,7 +25,7 @@ export default function useUpdatePassword(token) {
   const { errors, isSubmitting } = formState;
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
-    await updatePasswordCodeApi(data,token)
+    await updatePasswordCodeApi(data, token)
       .then((resualt) => {
         console.log(resualt);
         setSuccess(true);

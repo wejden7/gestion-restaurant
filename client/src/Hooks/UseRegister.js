@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { registerApi } from "apis/auth.api";
+import { registerApi } from "utils/apis/auth.api";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -18,28 +18,28 @@ const user = {
   password: "",
 };
 const formOption = {
-    resolver: yupResolver(validationSchema),
-    defaultValues: user,
-  };
+  resolver: yupResolver(validationSchema),
+  defaultValues: user,
+};
 export default function useRegister() {
-  const [error,setError] = useState(null)
-  const [success,setSuccess] = useState(false)
-  const { register, handleSubmit, formState,reset } = useForm(formOption);
-  const { errors,isSubmitting } = formState;
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const { register, handleSubmit, formState, reset } = useForm(formOption);
+  const { errors, isSubmitting } = formState;
 
   const onSubmit = handleSubmit(async (data) => {
     await registerApi(data)
       .then((resualt) => {
         console.log(resualt);
-        setSuccess(true)
-        reset()
-        setError(null)
+        setSuccess(true);
+        reset();
+        setError(null);
       })
       .catch((error) => {
         console.log(error);
-        setError(error.errors)
+        setError(error.errors);
       });
   });
 
-  return {register, onSubmit, errors,isSubmitting,error,success};
+  return { register, onSubmit, errors, isSubmitting, error, success };
 }

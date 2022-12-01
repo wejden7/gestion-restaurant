@@ -1,0 +1,56 @@
+@import "utils/styles/colors";
+.accueil {
+  .accueil-header {
+    background: linear-gradient(to right, $color-blue-900 10%, $color-blue-100);
+    display: grid;
+    padding: 100px 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    place-items: center;
+    .detail {
+      color: #fff;
+
+      h1 {
+        font-size: 50px;
+        font-weight: 500;
+      }
+      h2 {
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 20px 0;
+      }
+      ul {
+        display: grid;
+        gap: 20px;
+        li::before {
+          content: "\2713";
+          margin-right: 30px;
+        }
+      }
+    }
+
+    .img {
+      width: 400px;
+      height: 300px;
+      background: white;
+      border-radius: 15px;
+    }
+  }
+  .accueil-partenaires {
+    padding: 70px 0;
+    display: grid;
+    justify-content: center;
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    .logo {
+      margin-top: 40px;
+       display: flex;
+      justify-content: space-around;
+      img {
+        width: 120px;
+      }
+    }
+  }
+}
