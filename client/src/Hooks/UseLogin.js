@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { login } from "state/AuthSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is reqired"),
   password: Yup.string()
@@ -25,6 +26,7 @@ export default function useLogin() {
   const { register, handleSubmit, formState, reset } = useForm(formOption);
   const { errors, isSubmitting } = formState;
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onSubmit = handleSubmit(async (data,e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ export default function useLogin() {
       .unwrap()
       .then((resualt) => {
         console.log(resualt);
+        navigate("/")
         setSuccess(true);
         reset();
         setError(null);

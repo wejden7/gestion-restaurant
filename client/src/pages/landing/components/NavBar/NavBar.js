@@ -39,9 +39,9 @@ function NavBar() {
           <img onClick={onClickDrop} src={profileUrl} alt="Profil url" />
           {open&&
           <div className="nav-user-dropdown">
-            <h1>wejden chneti</h1>
-            <h3>wejdenchneti@gmail.com</h3>
-            <h2>admin</h2>
+            <h1>{user.name}</h1>
+            <h3>{user.email}</h3>
+            <h2>{user.type}</h2>
             <div className="divider"/>
             <Link className="link"><HiAdjustmentsHorizontal/>Parametre</Link>
             <Link className="link"><AiOutlineMessage/>Messagerie </Link>

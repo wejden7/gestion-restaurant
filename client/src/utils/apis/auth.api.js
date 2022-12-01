@@ -12,11 +12,26 @@ export async function loginApi(user) {
       .catch((error) => reject(error.response.data.errors));
   });
 }
+export async function loginTokenApi() {
+const token =  localStorage.getItem("user-restauration-token");
+  const headers = { 
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "Application/json",
+    'Authorization': `Bearer ${token}` 
+};
+  return new Promise((resolve, reject) => {
+    api
+      .get("/api/auth/loginToken",{headers})
+      .then((result) => resolve(result.data))
+      .catch((error) => reject(error.response.data.errors));
+  });
+}
 
 export async function registerApi(user) {
   const headers = { 
     "Access-Control-Allow-Origin":"*",
     "Content-Type": "Application/json",
+    
 };
   return new Promise((resolve, reject) => {
     api
