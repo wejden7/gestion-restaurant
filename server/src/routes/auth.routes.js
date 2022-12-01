@@ -2,6 +2,7 @@ import express from "express";
 import {
   registerController,
   loginController,
+  loginbyTokenController,
   forgotPasswordController,
   verificationCodeController, 
   updatePasswordController,
@@ -16,4 +17,5 @@ router.post("/login", loginValidatore, loginController, handleError);
 router.post("/forgotPassword",emailValidatore, forgotPasswordController, handleError);
 router.post("/verificationCode",verificationCodeValidatore, verificationCodeController, handleError);
 router.post("/updatePassword",auth,updatePasswordValidatore, updatePasswordController, handleError);
+router.get("/loginToken",auth,loginbyTokenController,handleError)
 export default router;

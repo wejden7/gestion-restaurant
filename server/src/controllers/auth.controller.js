@@ -60,6 +60,15 @@ export const loginController = async (req, res, next) => {
     return next(error.message);
   }
 };
+export const loginbyTokenController = async (req,res,next)=>{
+  const {user}=req;
+  const token = createToken(user);
+return res.status(200).json({
+  message: "login successfully",
+  data: user,
+  token: token,
+})
+}
 
 export const forgotPasswordController = async (req, res, next) => {
   const { email } = req.body;
