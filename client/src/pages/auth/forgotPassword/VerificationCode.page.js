@@ -21,6 +21,7 @@ function VerificationCode() {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      className="content"
     >
       <h1 className="title-form">Verifivation Code</h1>
       <p className="sousTitle-form">

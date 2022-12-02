@@ -14,6 +14,7 @@ const UpdatePasworedContent = ({ useOther }) => {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      className="content"
     
     >
       <h1 className="title-form">Reset password</h1>

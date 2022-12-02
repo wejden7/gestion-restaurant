@@ -14,6 +14,7 @@ const RegisterContent = ({ useOther }) => {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      className="content"
     >
       <h1 className="title-form">Sign Up</h1>
       <p className="sousTitle-form">Creat account to start usign TacPro</p>
