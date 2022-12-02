@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useUpdatePassword from "Hooks/UseUpdatePassword";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import {loginPath,registerPath}from 'utils/router/pathRouter.util'
+import {loginPath,registerPath,Error404Path}from 'utils/router/pathRouter.util'
 const { PasswordInput, SubmitInput } = Input;
 
 const UpdatePasworedContent = ({ useOther }) => {
@@ -64,7 +64,7 @@ function UpdatePassword() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!state) navigate(loginPath);
+    if (!state) navigate(Error404Path);
   }, [state]);
   const { success, ...useOther } = useUpdatePassword(state?.token);
   return (

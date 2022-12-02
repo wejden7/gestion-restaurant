@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { Input } from "../components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {loginPath,registerPath} from 'utils/router/pathRouter.util'
+import {
+  loginPath,
+  registerPath,
+  Error404Path,
+} from "utils/router/pathRouter.util";
 import useVerificationCode from "Hooks/UseVerificationCode";
 const { TextInputCode, SubmitInput } = Input;
 
@@ -11,7 +15,7 @@ function VerificationCode() {
   const navigate = useNavigate();
   console.log(state);
   useEffect(() => {
-    if (!state) navigate(loginPath);
+    if (!state) navigate(Error404Path);
   }, [state]);
 
   const { register, onSubmit, errors, isSubmitting, error, success } =
@@ -40,7 +44,7 @@ function VerificationCode() {
         Already have an account ? <Link to={loginPath}>Sign In</Link>
       </p>
       <p className="have-not-account">
-        Don't have an account? <Link to={loginPath}>Sign Up</Link>{" "}
+        Don't have an account? <Link to={registerPath}>Sign Up</Link>{" "}
       </p>
     </motion.div>
   );
