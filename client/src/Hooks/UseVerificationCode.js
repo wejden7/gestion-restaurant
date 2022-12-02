@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { verificationCodeApi } from "utils/apis/auth.api";
 import { useNavigate } from "react-router-dom";
+import {UpdatePasswordPath} from 'utils/router/pathRouter.util'
 const validationSchema = Yup.object().shape({
   code: Yup.string().required("Code is reqired"),
 });
@@ -28,7 +29,7 @@ export default function useVerificationCode(email) {
     await verificationCodeApi(data)
       .then((resualt) => {
         console.log(resualt);
-        navigate("/update-password", { state: { token: resualt.token } });
+        navigate(UpdatePasswordPath, { state: { token: resualt.token } });
         setSuccess(true);
         reset();
         setError(null);

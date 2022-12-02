@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { loginPath, registerPath } from "utils/router/pathRouter.util";
 import { getUser } from "state/AuthSlice";
 import { AvatarUser } from "components";
 import "./NavBar.style.scss";
@@ -11,13 +11,11 @@ function NavBar() {
   const navigate = useNavigate();
 
   const signIn = () => {
-    navigate("/login");
+    navigate(loginPath);
   };
   const signUp = () => {
-    navigate("/register");
+    navigate(registerPath);
   };
-
-  const toDashboard = () => {};
 
   return (
     <div className="nav-bar">

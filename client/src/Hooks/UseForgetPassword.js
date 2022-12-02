@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { forgotPasswordApi } from "utils/apis/auth.api";
 import { useNavigate } from "react-router-dom";
+import {VerificationCodePAth} from 'utils/router/pathRouter.util'
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is reqired"),
 });
@@ -25,7 +26,7 @@ export default function useForgotPassword() {
     await forgotPasswordApi(data)
       .then((resualt) => {
         console.log(resualt);
-        navigate("/verification-code", { state: { email: resualt.data } });
+        navigate(VerificationCodePAth, { state: { email: resualt.data } });
         setSuccess(true);
         reset();
         setError(null);

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useRegister from "Hooks/UseRegister";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { loginPath } from "utils/router/pathRouter.util";
 const { TextInputName, EmailInput, PasswordInput, SubmitInput } = Input;
 
 const RegisterContent = ({ useOther }) => {
@@ -13,7 +14,6 @@ const RegisterContent = ({ useOther }) => {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="content"
     >
       <h1 className="title-form">Sign Up</h1>
       <p className="sousTitle-form">Creat account to start usign TacPro</p>
@@ -34,7 +34,7 @@ const RegisterContent = ({ useOther }) => {
         <SubmitInput isSubmitting={isSubmitting} label="Sign Up" />
       </form>
       <p className="have-not-account">
-        Already have an account ? <Link to="/login">Sign in</Link>
+        Already have an account ? <Link to={loginPath}>Sign in</Link>
       </p>
     </motion.div>
   );
@@ -44,7 +44,7 @@ const RegisterSuccess = () => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate("/login");
+    navigate(loginPath);
   };
   return (
     <div className="content-success">
@@ -65,10 +65,10 @@ const RegisterSuccess = () => {
 
 const Register = () => {
   const { success, ...useOther } = useRegister();
-  return (
-    <div className="body">
-      {!success ? <RegisterContent useOther={useOther} /> : <RegisterSuccess />}
-    </div>
+  return !success ? (
+    <RegisterContent useOther={useOther} />
+  ) : (
+    <RegisterSuccess />
   );
 };
 

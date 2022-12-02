@@ -2,34 +2,36 @@ import React from "react";
 import { Input } from "../components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import {loginPath,registerPath} from 'utils/router/pathRouter.util'
 import useForgotPassword from "Hooks/UseForgetPassword";
 const { EmailInput, SubmitInput } = Input;
 
 function ForgetPassword() {
-    const {register, onSubmit, errors,isSubmitting,error,success } =useForgotPassword()
+  const { register, onSubmit, errors, isSubmitting, error, success } =
+    useForgotPassword();
   return (
-    <div className="body">
-      <motion.div
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="content"
-      >
-        <h1 className="title-form">Forgot Password</h1>
-        <p className="sousTitle-form">Enter your email </p>
-        <p className="error-form">{error}</p>
-        <form onSubmit={onSubmit}>
-          <EmailInput register={register("email")} error={errors.email?.message} />
-          <SubmitInput label="Send" isSubmitting={isSubmitting}/>
-        </form>
-        <p className="have-not-account">
-        Already have an account ? <Link to="/login">Sign in</Link>
+    <motion.div
+      initial={{ opacity: 0.5 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h1 className="title-form">Forgot Password</h1>
+      <p className="sousTitle-form">Enter your email </p>
+      <p className="error-form">{error}</p>
+      <form onSubmit={onSubmit}>
+        <EmailInput
+          register={register("email")}
+          error={errors.email?.message}
+        />
+        <SubmitInput label="Send" isSubmitting={isSubmitting} />
+      </form>
+      <p className="have-not-account">
+        Already have an account ? <Link to={loginPath}>Sign in</Link>
       </p>
       <p className="have-not-account">
-          Don't have an account? <Link to="/register">Sign Up</Link>{" "}
-        </p>
-      </motion.div>
-    </div>
+        Don't have an account? <Link to={registerPath}>Sign Up</Link>{" "}
+      </p>
+    </motion.div>
   );
 }
 

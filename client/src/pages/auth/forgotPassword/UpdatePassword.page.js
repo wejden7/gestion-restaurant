@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useUpdatePassword from "Hooks/UseUpdatePassword";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import {loginPath,registerPath}from 'utils/router/pathRouter.util'
 const { PasswordInput, SubmitInput } = Input;
 
 const UpdatePasworedContent = ({ useOther }) => {
@@ -13,7 +14,7 @@ const UpdatePasworedContent = ({ useOther }) => {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="content"
+    
     >
       <h1 className="title-form">Reset password</h1>
       <p className="sousTitle-form">Entre new password </p>
@@ -26,10 +27,10 @@ const UpdatePasworedContent = ({ useOther }) => {
         <SubmitInput label="Save" isSubmitting={isSubmitting} />
       </form>
       <p className="have-not-account">
-        Already have an account ? <Link to="/login">Sign In</Link>
+        Already have an account ? <Link to={loginPath}>Sign In</Link>
       </p>
       <p className="have-not-account">
-        Don't have an account? <Link to="/register">Sign Up</Link>{" "}
+        Don't have an account? <Link to={registerPath}>Sign Up</Link>{" "}
       </p>
     </motion.div>
   );
@@ -39,7 +40,7 @@ const UpdatePasswordSuccess = () => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate("/login");
+    navigate(loginPath);
   };
   return (
     <div className="content-success">
@@ -62,17 +63,17 @@ function UpdatePassword() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!state) navigate("/login");
+    if (!state) navigate(loginPath);
   }, [state]);
   const { success, ...useOther } = useUpdatePassword(state?.token);
   return (
-    <div className="body">
-      {!success ? (
+ 
+      !success ? (
         <UpdatePasworedContent useOther={useOther} />
       ) : (
         <UpdatePasswordSuccess />
-      )}
-    </div>
+      )
+  
   );
 }
 
