@@ -1,0 +1,50 @@
+@import "utils/styles/colors";
+@import "utils/styles/button";
+.btn-list {
+  .btn-list-btn {
+    @extend .btn-sideBar-default;
+    &::after {
+      content: "\f105";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 600;
+      margin-right: 4px;
+      transition: transform 0.3s linear;
+      transform: rotate(0deg);
+    }
+  }
+  .btn-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition-property: max-height, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    transform: rotateX(90deg);
+    :first-child {
+      margin-top: 4px;
+    }
+    .btn-nav-link {
+      background-color: transparent;
+      border: 1px $color-gray-100 solid;
+      &:hover {
+        background-color: $color-gray-100;
+      }
+    }
+  }
+
+  &.active {
+    .btn-list-item {
+      max-height: 500px;
+      transform: rotateX(0deg);
+    }
+    .btn-list-btn {
+      &::after {
+        transition: transform 0.3s linear;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

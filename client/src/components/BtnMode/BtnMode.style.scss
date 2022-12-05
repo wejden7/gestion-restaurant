@@ -1,0 +1,112 @@
+@import "utils/styles/colors";
+.btn-mode-theme {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 54px;
+  margin: 0 3px;
+  border-radius: 5px;
+  animation: closeMode 1s linear;
+  .btn-mode-theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: $color-black;
+    color: $color-gray-100;
+    &:hover {
+      background-color: $color-gray-100;
+      color: $color-black;
+    }
+  }
+  .btn-mode-dark-btn {
+    h1 {
+      display: none;
+    }
+  }
+  .btn-mode-light-btn {
+    display: none;
+  }
+}
+.dashboard.dark .btn-mode-theme {
+  .btn-mode-dark-btn {
+    display: none;
+  }
+  .btn-mode-light-btn {
+    display: flex;
+    h1 {
+      display: none;
+    }
+  }
+}
+
+.dashboard {
+  &.side-bar-open .btn-mode-theme {
+    width: 244px;
+    background-color: $color-black;
+    padding: 4px 4px;
+    border-radius: 20px;
+    gap:4px;
+    animation: openMode 1s linear;
+    .btn-mode-theme-btn {
+      padding: 4px 0;
+      border-radius: 20px;
+      &:hover {
+        background-color: $color-gray-100;
+        color: $color-dark;
+      }
+    }
+    .btn-mode-dark-btn {
+      background-color: $color-black;
+      color: $color-gray-100;
+      display: flex;
+      h1 {
+        display: flex;
+      }
+    }
+    .btn-mode-light-btn {
+      background-color: $color-gray-100;
+      color: $color-dark;
+      display: flex;
+      h1 {
+        display: flex;
+      }
+    }
+  }
+  &.dark .btn-mode-theme {
+    .btn-mode-dark-btn {
+      background-color: $color-gray-100;
+      color: $color-dark;
+    }
+    .btn-mode-light-btn {
+      background-color: $color-black;
+      color: $color-gray-100;
+    }
+  }
+}
+@keyframes openMode {
+  from {
+    opacity: 0;
+    transform: scale(0) translateX(-1000px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0px);
+  }
+}
+@keyframes closeMode {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

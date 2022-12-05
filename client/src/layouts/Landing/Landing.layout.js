@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { NavBar, Footer } from "../../pages/landing/components";
+import { NavBar, Footer } from "pages/landing/components";
 function Layout() {
   return (
     <div>

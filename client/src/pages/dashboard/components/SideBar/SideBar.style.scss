@@ -1,0 +1,51 @@
+@import "utils/styles/colors";
+.dashboard-side-bar {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-bottom: 70px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .dashboard-side-bar-point {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 10px;
+    margin-left: 4px;
+    transition: margin 0.5s ease;
+    background: rgb(255, 0, 183);
+    &::after {
+      content: "";
+      position: absolute;
+      margin-left: 20px;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: rgb(255, 0, 0);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      margin-left: 40px;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: rgb(0, 255, 34);
+    }
+  }
+
+  .dashboard-side-bar-links {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+.dashboard.side-bar-open .dashboard-side-bar .dashboard-side-bar-point {
+  margin-left: 100px;
+}

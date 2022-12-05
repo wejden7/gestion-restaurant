@@ -1,18 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
-import { auth, landing,error } from "pages";
-import { AuthLayout, LandingLayout } from "layouts";
+import { auth, landing, error } from "pages";
+import { AuthLayout, LandingLayout, DashboardLayout } from "layouts";
 
 export default createBrowserRouter([
   {
     path: "/",
     element: <LandingLayout />,
     loader: async (param) => {},
-    errorElement: <error.NotFound/>,
+    errorElement: <error.NotFound />,
     children: [{ path: "/", element: <landing.Accueil /> }],
   },
   {
     path: "/404",
-    element: <error.NotFound/>,
+    element: <error.NotFound />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <div className="content-dashboard">wejden</div>,
+      },
+    ],
   },
   {
     path: "/user",

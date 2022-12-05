@@ -1,0 +1,61 @@
+@import "utils/styles/colors";
+.dashboard {
+  min-height: 100vh;
+  background-color: whitesmoke;
+  transition-property: color,background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+  color: #000;
+  .nav-bar-dashboard {
+    background: white;
+    box-shadow: 0px 4px 8px -5px $color-gray-500;
+    margin-left: 60px;
+    z-index: 10;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+  }
+  .dashboard-side-bar {
+    background-color: white;
+    box-shadow: 4px 60px 8px -5px $color-gray-500;
+    width: 60px;
+    height: 100vh;
+    z-index: 20;
+    position: fixed;
+    border-right: 1px solid $color-gray-100;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+  }
+  .content-dashboard {
+    margin-left: 85px;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  &.dark {
+    background: linear-gradient($color-blue-900, $color-black);
+    color: #fff;
+    .nav-bar-dashboard {
+      background: $color-blue-900;
+      box-shadow: 0px 4px 8px -5px $color-black;
+    }
+    .dashboard-side-bar {
+      background: $color-blue-900;
+      box-shadow: 4px 0px 8px -5px $color-black;
+      border-right: 1px solid $color-black;
+    }
+  }
+  &.side-bar-open {
+    .nav-bar-dashboard {
+      margin-left: 250px;
+    }
+
+    .dashboard-side-bar {
+      width: 250px;
+    }
+    .content-dashboard {
+      margin-left: 265px;
+    }
+  }
+}

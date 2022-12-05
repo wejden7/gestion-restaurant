@@ -4,6 +4,7 @@ import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {logOut} from 'state/AuthSlice'
+import {DashboardPAth} from "utils/router/pathRouter.util"
 import "./AvatarUser.style.scss";
 
 const profileUrl =
@@ -43,7 +44,7 @@ function AvatarUser({ user }) {
             <AiOutlinePoweroff /> Sign Out
           </button>
           <div className="divider" />
-          <Link className="dashboard">Dashboard</Link>
+          <Link to={DashboardPAth} className="btn-dashboard">Dashboard</Link>
         </div>
       )}
     </div>
