@@ -1,4 +1,5 @@
-import userModel from "../models/user.model.js";
+import userModel from "#models/user.model.js";
+import employerModel from "#models/employer.model.js";
 import JWT from "passport-jwt";
 import dotenv from "dotenv";
 
@@ -11,16 +12,22 @@ var opts = {
   secretOrKey: process.env.KEY_JWT,
 };
 
-export default new JwtStrategy(opts, function (jwt_payload, done) {
-  userModel.findOne({ _id: jwt_payload.id }, function (err, user) {
-    if (err) {
-      return done(err, false);
-    }
+export default new JwtStrategy(opts, async function (jwt_payload, done) {
+  try {
+    const user = await userModel.findOne({ _id: jwt_payload.id });
+    const employer = await employerModel.findById(jwt_payload.id);
+
     if (user) {
-      return done(null, user);
+      const newuser = { _id: user.id, role: jwt_payload.role };
+      return done(null, newuser);
+    } else if (employer) {
+      const newemployer = { _id: employer.id, role: jwt_payload.role };
+      return done(null, newemployer);
     } else {
-      return done(err, false);
+      return done(true, false);
       // or you could create a new account
     }
-  });
+  } catch (error) {
+    return done(error, false);
+  }
 });

@@ -10,10 +10,10 @@ const userShema = mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    enum: ["admin", "employee"],
+  etablissement: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: "Etablissement",
   },
   password: {
     type: String,
@@ -21,8 +21,7 @@ const userShema = mongoose.Schema({
   },
   code: {
     type: String,
-    default:null
-    
+    default: null,
   },
   createdDate: { type: Date, default: new Date() },
   updatedDate: { type: Date, default: new Date() },

@@ -2,8 +2,13 @@ import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 
 import userModel from "#models/user.model.js";
+import etablissementModel from "#models/etablissement.model.js";
+import brancheModel from "#models/branche.model.js";
+import zoneModel from "#models/zone.model.js";
+import employerModel from "#models/employer.model.js";
 import {
   createToken,
+  createTokenEmplyer,
   randomString,
   durationHourUpdate,
 } from "#helpers/service.js";
@@ -21,7 +26,19 @@ export const registerController = async (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(10);
     req.body.password = bcrypt.hashSync(password, salt);
-    req.body.type="admin"
+    req.body.type = "admin";
+    const etablissement = await etablissementModel.create({
+      label: "restaurant",
+    });
+    const branche = await brancheModel.create({
+      label: "restaurant 1",
+      etablissement: etablissement._id,
+    });
+    const zone = await zoneModel.create({
+      label: "zone1",
+      branche: branche._id,
+    });
+    req.body.etablissement = etablissement._id;
     const newUser = await userModel.create(req.body);
 
     const token = createToken(newUser);
@@ -60,15 +77,15 @@ export const loginController = async (req, res, next) => {
     return next(error.message);
   }
 };
-export const loginbyTokenController = async (req,res,next)=>{
-  const {user}=req;
+export const loginbyTokenController = async (req, res, next) => {
+  const { user } = req;
   const token = createToken(user);
-return res.status(200).json({
-  message: "login successfully",
-  data: user,
-  token: token,
-})
-}
+  return res.status(200).json({
+    message: "login successfully",
+    data: user,
+    token: token,
+  });
+};
 
 export const forgotPasswordController = async (req, res, next) => {
   const { email } = req.body;
@@ -88,7 +105,9 @@ export const forgotPasswordController = async (req, res, next) => {
 
     await sendMail(user.email, code);
 
-    return res.status(200).json({ message: "email code send successfully",data: user.email});
+    return res
+      .status(200)
+      .json({ message: "email code send successfully", data: user.email });
   } catch (error) {
     return next(error.message);
   }
@@ -109,7 +128,7 @@ export const verificationCodeController = async (req, res, next) => {
       const token = createToken(user);
       return res.status(200).json({ message: "code valide", token: token });
     }
-    
+
     user.code = null;
     user.updatedDate = new Date();
     user.save();
@@ -138,6 +157,31 @@ export const updatePasswordController = async (req, res, next) => {
     return next(error.message);
   }
 };
+
+export const loginEmployerController = async (req,res,next) => {
+  const { userName, codeLogin } = req.body;
+
+  const err = validationResult(req);
+  if (!err.isEmpty()) return next(err.errors);
+
+  try {
+    const employer = await employerModel.findOne({ userName });
+    if (!employer) return next(` user Name not found`);
+
+    if (!bcrypt.compareSync(codeLogin, employer.codeLogin))
+      return next("incorrect code Login");
+
+    const token = createTokenEmplyer(employer);
+
+    return res.status(201).json({
+      message: "login successfully",
+      data: employer,
+      token: token,
+    });
+  } catch (error) {
+    return next(error.message);
+  }
+}
 
 export const handleError = async (error, req, res, next) => {
   return res.status(500).json({
