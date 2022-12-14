@@ -1,11 +1,11 @@
 import React from "react";
-import { Input } from "../components";
+import { InputAuth } from "components";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useRegister from "Hooks/UseRegister";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { loginPath } from "utils/router/pathRouter.util";
-const { TextInputName, EmailInput, PasswordInput, SubmitInput } = Input;
+const { TextInputName, EmailInput, PasswordInput, SubmitInput } = InputAuth;
 
 const RegisterContent = ({ useOther }) => {
   const { register, onSubmit, errors, isSubmitting, error } = useOther;

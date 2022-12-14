@@ -2,7 +2,7 @@
 .dashboard {
   min-height: 100vh;
   background-color: whitesmoke;
-  transition-property: color,background-color;
+  transition-property: color, background-color;
   transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
   color: #000;
@@ -31,6 +31,22 @@
     margin-left: 85px;
     margin-top: 15px;
     transition: all 0.5s ease-in-out;
+  }
+  .btn-setting {
+    &::after {
+      content: "\f013";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 600;
+      font-size: 25px;
+      padding: 5px 10px;
+      position: fixed;
+      bottom: 35px;
+      right: 35px;
+      border-radius: 50%;
+      color: #fff;
+      background-color: $color-blue-900;
+      box-shadow: 0px 0px 10px $color-blue-900;
+    }
   }
 
   &.dark {

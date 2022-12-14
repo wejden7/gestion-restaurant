@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Input } from "../components";
+import { InputAuth } from "components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -8,7 +8,7 @@ import {
   Error404Path,
 } from "utils/router/pathRouter.util";
 import useVerificationCode from "Hooks/UseVerificationCode";
-const { TextInputCode, SubmitInput } = Input;
+const { TextInputCode, SubmitInput } = InputAuth;
 
 function VerificationCode() {
   const { state } = useLocation();

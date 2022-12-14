@@ -1,10 +1,10 @@
 import React from "react";
-import { Input } from "../components";
+import { InputAuth } from "components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useLogin from "Hooks/UseLogin";
 import {registerPath,ForgetPasswordPath } from 'utils/router/pathRouter.util'
-const { EmailInput, PasswordInput, SubmitInput } = Input;
+const { EmailInput, PasswordInput, SubmitInput } = InputAuth;
 
 function Login() {
   const { register, onSubmit, errors, isSubmitting, error,success } = useLogin();

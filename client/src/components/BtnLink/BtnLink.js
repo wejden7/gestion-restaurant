@@ -1,10 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./BtnLink.style.scss";
-function BtnLink({name,icon}) {
+function BtnLink({ name, icon ,to}) {
   return (
-    <NavLink  className="btn-nav-link" >
-      {icon}<h1>{name}</h1>
+    <NavLink
+      to={to}
+      className={({ isActive }) => (isActive ? "btn-nav-link active" : "btn-nav-link")}
+   end >
+     <span>{icon}</span>
+      <h1 className="label-link">{name}</h1>
     </NavLink>
   );
 }

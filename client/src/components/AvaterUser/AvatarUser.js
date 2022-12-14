@@ -27,7 +27,7 @@ function AvatarUser({ user }) {
         <div className="Avatar-user-dropdown">
           <h1>{user.name}</h1>
           <h3>{user.email}</h3>
-          <h2>{user.type}</h2>
+          <h2>{user.role}</h2>
           <div className="divider" />
           <Link className="link">
             <HiAdjustmentsHorizontal />

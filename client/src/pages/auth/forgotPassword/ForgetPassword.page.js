@@ -1,10 +1,10 @@
 import React from "react";
-import { Input } from "../components";
+import { InputAuth } from "components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {loginPath,registerPath} from 'utils/router/pathRouter.util'
 import useForgotPassword from "Hooks/UseForgetPassword";
-const { EmailInput, SubmitInput } = Input;
+const { EmailInput, SubmitInput } = InputAuth;
 
 function ForgetPassword() {
   const { register, onSubmit, errors, isSubmitting, error, success } =

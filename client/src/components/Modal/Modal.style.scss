@@ -1,0 +1,14 @@
+@import "utils/styles/colors";
+.modal {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  &.dark{
+    background-color: $color-blue-900;
+    color: white;
+  }
+}
+

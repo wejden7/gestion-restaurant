@@ -1,7 +1,7 @@
 import zoneModel from "#models/zone.model.js";
 import brancheModel from "#models/branche.model.js";
 
-import { brancheUser,zoneUser } from "#helpers/service.js";
+import { brancheUser, zoneUser } from "#helpers/service.js";
 
 import { validationResult } from "express-validator";
 
@@ -34,9 +34,9 @@ export const createZoneController = async (req, res, next) => {
 export const deleteZoneController = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const existe = await zoneUser(id,req.user)
+    const existe = await zoneUser(id, req.user);
     if (!existe) return next("zone not Autautization to delete or not found");
-    await zoneModel.deleteOne({_id:id});
+    await zoneModel.deleteOne({ _id: id });
     return res.status(200).json({
       message: "Zone deleted successfully",
       data: id,
@@ -51,7 +51,7 @@ export const deleteZoneByBrancheController = async (req, res, next) => {
   try {
     const brancheExiste = await brancheUser(id, req.user);
     if (!brancheExiste) return next("branche not authorized");
-    
+
     const zone = await zoneModel.deleteMany({ branche: id });
     if (zone.deletedCount === 0) return next("zone not found");
 
@@ -68,9 +68,9 @@ export const findZoneController = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const existe = await zoneUser(id,req.user)
+    const existe = await zoneUser(id, req.user);
     if (!existe) return next("zone not Autautization to find or not found");
-    
+
     const zone = await zoneModel.findById(id).populate("branche");
 
     return res.status(200).json({
@@ -88,7 +88,7 @@ export const findZoneByBrancheController = async (req, res, next) => {
   try {
     const brancheExiste = await brancheUser(id, req.user);
     if (!brancheExiste) return next("branche not authorized");
-    
+
     const zone = await zoneModel.find({ branche: id }).select("-branche -__v");
     return res.status(200).json({
       message: "Zone find successfully",
@@ -99,21 +99,26 @@ export const findZoneByBrancheController = async (req, res, next) => {
   }
 };
 
-export const updateZoneController = async (req, res, next) => {
-  const err = validationResult(req);
-  if (!err.isEmpty()) return next(err.errors);
+export const openCloseZoneController = async (req, res, next) => {
   const { id } = req.params;
-  const {label,ferme}=req.body
-
   try {
-    const existe = await zoneUser(id,req.user)
+    const existe = await zoneUser(id, req.user);
     if (!existe) return next("zone not Autautization to find or not found");
-    
-    const zone = await zoneModel.findByIdAndUpdate(id,{label,ferme}, { new: true });
+
+    const zone = await zoneModel.findById(id);
     if (!zone) return next("zone not found");
+    zone.ferme = !zone.ferme;
+    await zone.save();
+    const branche = await brancheModel.findById({ _id: zone.branche });
+    const zones = await zoneModel.find({ branche: branche._id });
+    const newObject = {
+      _id: branche._id,
+      label: branche.label,
+      zones: zones,
+    };
     return res.status(200).json({
       message: "Zone update successfully",
-      data: zone,
+      data: newObject,
     });
   } catch (error) {
     console.log(error);

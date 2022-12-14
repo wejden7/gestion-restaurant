@@ -1,6 +1,15 @@
-export {default as AvatarUser} from './AvaterUser/AvatarUser'
-export {default as BtnMenu} from './BtnMenu/BtnMenu'
-export {default as BtnLink} from './BtnLink/BtnLink'
-export {default as BtnMode} from './BtnMode/BtnMode'
-export {default as BtnList} from './BtnList/BtnList'
-export {default as Notification} from './Notification/Notification';
+export { default as AvatarUser } from "./AvaterUser/AvatarUser";
+export { default as BtnMenu } from "./BtnMenu/BtnMenu";
+export { default as BtnLink } from "./BtnLink/BtnLink";
+export { default as BtnMode } from "./BtnMode/BtnMode";
+export { default as BtnList } from "./BtnList/BtnList";
+export { default as Notification } from "./Notification/Notification";
+export { default as ModalComponent } from "./Modal/Modal";
+export { default as AddNewTeam } from "./AddNewTeam/AddNewTeam";
+export { default as TeamList } from "./TeamList/TeamList";
+export { default as NavBar } from "./NavBar/NavBar";
+export { default as SideBar } from "./SideBar/SideBar";
+export { default as PreferanceDuCompte } from "./Préférénces du compte/PreferanceDuCompte";
+export * as InputAuth from "./InputAuth/InputAuth";
+export * as Branche from "./Branche";
+export * as Poste from "./Poste";

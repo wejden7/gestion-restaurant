@@ -1,0 +1,44 @@
+@import "utils/styles/colors";
+.content-dashboard-setting {
+  max-width: calc(100vw - 110px);
+  background: $color-light-opacity;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  height: calc(100vh - 100px);
+  border-radius: 5px;
+  animation: animation-setting 0.5s ease-in-out ;
+  display: flex;
+  .content-dashboard-setting-link {
+    width: 25%;
+    border-right: 1px solid $color-light-opacity;
+    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+    padding-left: 5%;
+  }
+  .content-dashboard-setting-content {
+    width: 75%;
+    padding: 20px;
+  }
+}
+
+.dashboard.side-bar-open .content-dashboard-setting {
+  max-width: calc(100vw - 290px);
+}
+.dashboard.dark .content-dashboard-setting {
+}
+
+@keyframes animation-setting {
+    from{
+      max-height: 0;
+      overflow: hidden;
+      
+    }
+    to{
+        max-height: 15000px;
+       
+    }
+}

@@ -1,0 +1,18 @@
+@import "utils/styles/colors";
+.liste-postes-style {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  .item-liste-postes {
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    background-color: $color-light-opacity;
+    position: relative;
+    transition: scale 0.3s ease-in-out;
+    &:hover {
+      scale: 0.9;
+    }
+  }
+}

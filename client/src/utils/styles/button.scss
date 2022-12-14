@@ -6,21 +6,27 @@
   width: calc(100% - 6px);
   margin: 0 3px;
   padding: 8px 0;
+  height: 40px;
   font-size: 20px;
   border-radius: 5px;
   background-color: $color-light;
+  &.active{
+    background-color: $color-gray-100;
+    color: $color-blue-100;
+  }
   &:hover {
     background-color: $color-gray-100;
     color: $color-blue-100;
   }
-  :nth-child(1) {
+  span {
     position: absolute;
     font-size: 24px;
     margin-left: 15px;
   }
-  :nth-child(2) {
+  .label-link {
     margin-left: 60px;
-    white-space: nowrap;
+    font-size: 14px;
+   // white-space: nowrap;
     font-weight: 400;
   }
 }

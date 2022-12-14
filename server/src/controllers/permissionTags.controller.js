@@ -24,3 +24,16 @@ export const creatPermissionTagsController = async (req, res, next) => {
     next(error.message);
   }
 };
+
+export const findPermissionTagsController = async (req, res, next) => {
+  try {
+    const permission = await permissionTagsModel.find();
+
+    return res.status(200).json({
+        message: "permission find successfully",
+        data: permission,
+      });
+  } catch (error) {
+    next(error.message);
+  }
+}

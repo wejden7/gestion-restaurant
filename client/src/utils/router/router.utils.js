@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { auth, landing, error } from "pages";
+import { auth, landing, error, dashboard } from "pages";
 import { AuthLayout, LandingLayout, DashboardLayout } from "layouts";
+import { PreferanceDuCompte } from "components";
 
 export default createBrowserRouter([
   {
@@ -20,7 +21,22 @@ export default createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div className="content-dashboard">wejden</div>,
+        element: <dashboard.Accueil />,
+      },
+      {
+        path: "team",
+        element: <dashboard.Team />,
+      },
+      {
+        path: "setting",
+        element: <dashboard.Setting />,
+        children: [
+          {
+            index: true,
+            element: <PreferanceDuCompte />,
+          },
+          { path: "code", element: <div>code</div> },
+        ],
       },
     ],
   },

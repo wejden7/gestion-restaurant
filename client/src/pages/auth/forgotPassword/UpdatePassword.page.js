@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Input } from "../components";
+import { InputAuth } from "components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useUpdatePassword from "Hooks/UseUpdatePassword";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import {loginPath,registerPath,Error404Path}from 'utils/router/pathRouter.util'
-const { PasswordInput, SubmitInput } = Input;
+const { PasswordInput, SubmitInput } = InputAuth;
 
 const UpdatePasworedContent = ({ useOther }) => {
   const { register, onSubmit, errors, isSubmitting, error } = useOther;

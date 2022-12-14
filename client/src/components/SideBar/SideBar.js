@@ -8,6 +8,7 @@ import {
 import { FiActivity } from "react-icons/fi";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BtnLink, BtnMode, BtnList } from "components";
+import { DashboardTeamPAth, DashboardPAth } from "utils/router/pathRouter.util";
 
 import "./SideBar.style.scss";
 const links = [
@@ -35,11 +36,15 @@ function SideBar() {
     <div className="dashboard-side-bar">
       <div className="dashboard-side-bar-point" />
       <div className="dashboard-side-bar-links">
-        <BtnLink name="Dashbord" icon={<AiOutlineHome />} />
-        <BtnLink name="Setting" icon={<AiOutlineSetting />} />
-        <BtnLink name="Employer" icon={<AiOutlineUser />} />
+        <BtnLink to={DashboardPAth} name="Dashbord" icon={<AiOutlineHome />} />
+        <BtnLink
+          to={DashboardTeamPAth}
+          name="Team"
+          icon={<AiOutlineUser />}
+        />
+        <BtnLink to="/" name="Employer" icon={<AiOutlineUser />} />
         <BtnList icon={<AiOutlineUser />} name="Restaurant" links={links} />
-        <BtnLink name="Employer" icon={<AiOutlineUser />} />
+        <BtnLink to="/" name="Employer" icon={<AiOutlineUser />} />
         <BtnList icon={<AiOutlineHeatMap />} name="Plan" links={linksp} />
       </div>
       <BtnMode />

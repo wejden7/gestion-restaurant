@@ -83,17 +83,6 @@ export const createZoneValidatore = [
   check("label").notEmpty().withMessage("Label is required"),
   check("branche").notEmpty().withMessage("branche is required"),
 ];
-export const updateZoneValidatore = [
-  check("label")
-    .if(check("label").exists())
-    .notEmpty()
-    .withMessage("Label is required"),
-  check("ferme")
-    .if(check("ferme").exists())
-    .exists()
-    .notEmpty()
-    .withMessage("Laetablissementbel is required"),
-];
 
 export const createBrancheValidatore = [
   check("label").notEmpty().withMessage("Label is required"),

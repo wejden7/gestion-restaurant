@@ -159,3 +159,36 @@ const employerUserEmployer = async (id, user) => {
   if (!employer) return false;
   return true;
 };
+
+export const deleteZoneNotExite = async (zones, id) => {
+  try {
+    const zonesExiste = zones.filter((item) => item._id);
+    await zoneModel.deleteMany({
+      _id: { $nin: zonesExiste },
+      branche: id,
+    });
+  } catch (error) {}
+};
+
+export const createNewZone = async (zones, id) => {
+  try {
+    const zonesNew = zones.filter((item) => !item._id);
+    console.log(zonesNew);
+    for await (let zone of zonesNew) {
+      await zoneModel.create({ label: zone.label, branche: id });
+    }
+  } catch (error) {}
+};
+
+export const updateNewZone = async (zones) => {
+  try {
+    const zonesNew = zones.filter((item) => item._id);
+    console.log(zonesNew);
+    for await (let zone of zonesNew) {
+      await zoneModel.findByIdAndUpdate(
+        { _id: zone._id },
+        { label: zone.label }
+      );
+    }
+  } catch (error) {}
+};

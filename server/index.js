@@ -10,6 +10,7 @@ import JwtStrategy from "#helpers/jwt_strategy.js";
 //* Middleware import => #middleware
 import auth from "#middleware/auth.middleware.js";
 import { AuthorizationMiddleware } from "#middleware/authorization.middleware.js";
+import { AuthorizationAdminMiddleware } from "#middleware/authorization.middleware.js";
 
 //* Routes import => #routes
 import authRouter from "#routes/auth.routes.js";
@@ -41,12 +42,12 @@ app.get("/", (req, res) =>
 
 // * Error Handler Auth
 const errorHandler = (error, req, res, next) => {
-  return res.status(500).json({ send: false, error: error });
+  return res.status(500).json({ send2: false, error: error });
 };
 
 //* Use Routes
 app.use("/api/auth", authRouter);
-app.use("/api", permissionTagsRouter, errorHandler);
+app.use("/api",auth,AuthorizationAdminMiddleware, permissionTagsRouter, errorHandler);
 app.use("/api", auth, etablissementRouter, errorHandler);
 app.use("/api", auth, brancheRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, postRouter, errorHandler);

@@ -67,10 +67,15 @@ export const loginController = async (req, res, next) => {
       return next("incorrect password");
 
     const token = createToken(user);
-
+    const resault = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: "admin",
+    };
     return res.status(201).json({
       message: "login successfully",
-      data: user,
+      data: resault,
       token: token,
     });
   } catch (error) {
@@ -79,10 +84,18 @@ export const loginController = async (req, res, next) => {
 };
 export const loginbyTokenController = async (req, res, next) => {
   const { user } = req;
-  const token = createToken(user);
+  console.log(user);
+  const userById = await userModel.findById(user._id);
+  const resault = {
+    _id: user._id,
+    name: userById.name,
+    email: userById.email,
+    role: user.role,
+  };
+  const token = createToken(userById);
   return res.status(200).json({
     message: "login successfully",
-    data: user,
+    data: resault,
     token: token,
   });
 };
@@ -158,7 +171,7 @@ export const updatePasswordController = async (req, res, next) => {
   }
 };
 
-export const loginEmployerController = async (req,res,next) => {
+export const loginEmployerController = async (req, res, next) => {
   const { userName, codeLogin } = req.body;
 
   const err = validationResult(req);
@@ -181,7 +194,7 @@ export const loginEmployerController = async (req,res,next) => {
   } catch (error) {
     return next(error.message);
   }
-}
+};
 
 export const handleError = async (error, req, res, next) => {
   return res.status(500).json({
