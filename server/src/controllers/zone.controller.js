@@ -1,8 +1,8 @@
 import zoneModel from "#models/zone.model.js";
 import brancheModel from "#models/branche.model.js";
 
-import { brancheUser, zoneUser } from "#helpers/service.js";
-
+import { zoneUser } from "#service/zone.service.js";
+import { brancheUser } from "#service/branche.service.js";
 import { validationResult } from "express-validator";
 
 export const errorHandler = async (error, req, res, next) => {

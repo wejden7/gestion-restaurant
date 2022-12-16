@@ -12,27 +12,27 @@ const max = [
 const employerShema = mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   userName: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   codeLogin: {
     type: String,
-    require: true,
+    required: true,
   },
   timeWork: {
     start: {
       type: Number,
-      require: true,
+      required: true,
       min: min,
       max: max,
     },
     end: {
       type: Number,
-      require: true,
+      required: true,
       min: min,
       max: max,
     },
@@ -40,12 +40,12 @@ const employerShema = mongoose.Schema({
 
   post: {
     type: mongoose.Schema.Types.ObjectId,
-    require: true,
+    required: true,
     ref: "Post",
   },
   branche: {
     type: mongoose.Schema.Types.ObjectId,
-    require: true,
+    required: true,
     ref: "Branche",
   },
 });

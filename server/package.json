@@ -9,7 +9,8 @@
     "#helpers/*": "./src/helpers/*",
     "#controllers/*": "./src/controllers/*",
     "#routes/*": "./src/routes/*",
-    "#middleware/*": "./src/middleware/*"
+    "#middleware/*": "./src/middleware/*",
+    "#service/*": "./src/service/*"
   },
   "scripts": {
     "start": "nodemon index.js",

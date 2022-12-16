@@ -20,7 +20,7 @@ import zoneRouter from "#routes/zone.routes.js";
 import postRouter from "#routes/post.routes.js";
 import employerRouter from "#routes/employer.routes.js";
 import permissionTagsRouter from "#routes/permissionTags.routes.js";
-
+import presenceRouter from "#routes/presence.routes.js";
 //* Setup Environment Variables
 dotenv.config();
 
@@ -53,6 +53,7 @@ app.use("/api", auth, brancheRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, postRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, zoneRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, employerRouter, errorHandler);
+app.use("/api", auth, AuthorizationMiddleware, presenceRouter, errorHandler);
 app.use(
   "/api",
   auth,

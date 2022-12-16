@@ -1,13 +1,11 @@
 import employerModel from "#models/employer.model.js";
 import brancheModel from "#models/branche.model.js";
 
-import {
-  randomString,
-  postUser,
-  brancheUser,
-  employerUser,
-  etablissementByUser,
-} from "#helpers/service.js";
+import { etablissementByUser } from "#service/etablissement.service.js";
+import { brancheUser } from "#service/branche.service.js";
+import { randomString } from "#helpers/service.js";
+import { postUser } from "#service/post.service.js";
+import { employerUser } from "#service/employer.service.js";
 
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";

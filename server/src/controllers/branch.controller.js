@@ -1,12 +1,12 @@
 import { validationResult } from "express-validator";
 
 //* import from helpers
+import { etablissementByUser } from "#service/etablissement.service.js";
 import {
-  etablissementByUser,
   deleteZoneNotExite,
   createNewZone,
   updateNewZone,
-} from "#helpers/service.js";
+} from "#service/zone.service.js";
 
 //* import from models
 import brancheModel from "#models/branche.model.js";

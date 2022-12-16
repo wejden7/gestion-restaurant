@@ -1,7 +1,8 @@
 import { validationResult } from "express-validator";
 
 //* import * from helpers
-import { etablissementByUser, postUser } from "#helpers/service.js";
+import { etablissementByUser } from "#service/etablissement.service.js";
+import { postUser} from '#service/post.service.js'
 
 //* import  from models
 import postModel from "#models/post.model.js";
