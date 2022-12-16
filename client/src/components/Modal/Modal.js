@@ -2,8 +2,8 @@ import Modal from "@mui/material/Modal";
 import React from "react";
 import { UseStateDashboardContext } from "context/contextDaschboard";
 import "./Modal.style.scss";
-function ModalComponent({ children }) {
-  const { openModal, handleCloseModal ,mode} = UseStateDashboardContext();
+function ModalComponent({ children ,openModal,handleCloseModal}) {
+  const {   mode} = UseStateDashboardContext();
   return (
     <Modal
       open={openModal}

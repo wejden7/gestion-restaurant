@@ -5,6 +5,7 @@ import { store } from "./state/store";
 import "./index.scss";
 import App from "./App";
 import { loginToken } from "state/AuthSlice";
+import { fetchTeam } from "state/TeamSlice";
 import { findBranche, findEtablissement ,findPoste} from "state/SettingSlice";
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
@@ -13,6 +14,7 @@ store.dispatch(loginToken());
 store.dispatch(findBranche());
 store.dispatch(findEtablissement());
 store.dispatch(findPoste());
+store.dispatch(fetchTeam());
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

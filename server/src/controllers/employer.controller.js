@@ -1,5 +1,4 @@
 import employerModel from "#models/employer.model.js";
-import postModel from "#models/post.model.js";
 import brancheModel from "#models/branche.model.js";
 
 import {
@@ -7,6 +6,7 @@ import {
   postUser,
   brancheUser,
   employerUser,
+  etablissementByUser,
 } from "#helpers/service.js";
 
 import { validationResult } from "express-validator";
@@ -22,13 +22,15 @@ export const errorHandler = async (error, req, res, next) => {
 export const createEmployerController = async (req, res, next) => {
   const err = validationResult(req);
   if (!err.isEmpty()) return next(err.errors);
-  const { post, branche } = req.body;
+  const { post, branche, userName } = req.body;
 
   try {
     const postExiste = await postUser(post, req.user);
     if (!postExiste) return next("post not found");
     const brancheExiste = await brancheUser(branche, req.user);
     if (!brancheExiste) return next("branche not found");
+    const employerExiste = await employerModel.findOne({ userName });
+    if (employerExiste) return next("userName existe");
     const codeLogin = randomString(8, req.body.name);
     const salt = bcrypt.genSaltSync(10);
     req.body.codeLogin = bcrypt.hashSync(codeLogin, salt);
@@ -38,6 +40,30 @@ export const createEmployerController = async (req, res, next) => {
       message: "employer created successfully",
       data: employer,
       codeLogin: codeLogin,
+    });
+  } catch (error) {
+    return next(error.message);
+  }
+};
+
+export const findEmployerController = async (req, res, next) => {
+  const { user } = req;
+
+  try {
+    if (user.role === "admin") {
+      const { _id } = await etablissementByUser(user);
+      var condition = { etablissement: _id };
+    } else {
+      const employer = await employerModel.findById({ _id: user._id });
+      var condition = { _id: employer.branche };
+    }
+    const branches = await brancheModel.find(condition);
+    const employers = await employerModel
+      .find({ branche: { $in: branches } })
+      .select("-codeLogin");
+    return res.status(200).json({
+      message: "Employer deleted successfully",
+      data: employers,
     });
   } catch (error) {
     return next(error.message);

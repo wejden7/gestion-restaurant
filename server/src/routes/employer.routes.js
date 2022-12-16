@@ -4,6 +4,7 @@ import {
   deleteEmployerController,
   updateEmployerController,
   updateCodeLoginEmployerController,
+  findEmployerController,
   errorHandler,
 } from "#controllers/employer.controller.js";
 
@@ -28,6 +29,11 @@ router.put(
 router.put(
   "/employer-code-login/:id",
   updateCodeLoginEmployerController,
+  errorHandler
+);
+router.get(
+  "/employer",
+  findEmployerController,
   errorHandler
 );
 

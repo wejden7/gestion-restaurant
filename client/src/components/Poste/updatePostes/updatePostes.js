@@ -4,9 +4,7 @@ import useFormPoste from "Hooks/useFormPoste";
 import { useQuery } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 import { getPostesById, deletePoste } from "state/SettingSlice";
-import { UseStateDashboardContext } from "context/contextDaschboard";
 import { findPermissionTagsApi } from "utils/apis/poste.api";
-
 import "./updatePostes.style.scss";
 
 const PermissionListe = ({ register }) => {
@@ -33,9 +31,9 @@ const PermissionListe = ({ register }) => {
   );
 };
 
-const UpdatePostes = ({ id }) => {
+const UpdatePostes = ({ id ,handleCloseModal}) => {
   const dispatch = useDispatch();
-  const { handleCloseModal } = UseStateDashboardContext();
+
   const poste = useSelector((state) => getPostesById(state, id));
   const { register, onSubmit, errors, isSubmitting } = useFormPoste(
     poste,
@@ -51,41 +49,45 @@ const UpdatePostes = ({ id }) => {
   };
 
   return (
-    <div className="update-postes">
-      <form onSubmit={onSubmit} className="form-group-update-post">
-        <label className="input-group" htmlFor="name-group">
-          <input
-            {...register("label")}
-            type="text"
-            id="name-group"
-            placeholder="Name de Poste"
-          />
-          <p className="error_input">{errors.label?.message}</p>
-        </label>
+      <div className="update-postes">
+        <form onSubmit={onSubmit} className="form-group-update-post">
+          <label className="input-group" htmlFor="name-group">
+            <input
+              {...register("label")}
+              type="text"
+              id="name-group"
+              placeholder="Name de Poste"
+            />
+            <p className="error_input">{errors.label?.message}</p>
+          </label>
 
-        <PermissionListe register={register} />
-        <div className="btn-group-update-postes">
-          <button type="submit" className="btn btn-save-update-postes">
-            {" "}
-            {!isSubmitting ? "save" : <BarLoader color="#fefbd8" width={30} />}
-          </button>
-          <button
-            onClick={handleCloseModal}
-            type="button"
-            className="btn btn-close-update-postes"
-          >
-            Annuler
-          </button>
-          <button
-            onClick={onDelete}
-            type="button"
-            className="btn btn-delete-update-postes"
-          >
-            Delete
-          </button>
-        </div>
-      </form>
-    </div>
+          <PermissionListe register={register} />
+          <div className="btn-group-update-postes">
+            <button type="submit" className="btn btn-save-update-postes">
+              {" "}
+              {!isSubmitting ? (
+                "save"
+              ) : (
+                <BarLoader color="#fefbd8" width={30} />
+              )}
+            </button>
+            <button
+              onClick={handleCloseModal}
+              type="button"
+              className="btn btn-close-update-postes"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={onDelete}
+              type="button"
+              className="btn btn-delete-update-postes"
+            >
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
   );
 };
 

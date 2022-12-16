@@ -56,7 +56,6 @@ const etablissementByUserAdmin = async ({ _id }) => {
 };
 const etablissementByUserEmployer = async ({ _id }) => {
   const employer = await employerModel.findById(_id);
-
   const { branche } = employer;
   const branche_ = await brancheModel
     .findById(branche)
@@ -140,7 +139,7 @@ export const employerUser = async (id, user) => {
 };
 
 const employerUserAdmin = async (id, user) => {
-  const etablissement = await etablissementByUserEmployer(user);
+  const etablissement = await etablissementByUserAdmin(user);
   const branches = await brancheModel
     .find({ etablissement: etablissement._id })
     .select("_id");

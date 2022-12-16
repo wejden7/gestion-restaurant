@@ -142,6 +142,7 @@ const SettingSlice = createSlice({
       });
   },
 });
+
 export const getBranches = (state) => state.setting.branches;
 export const getPostes = (state) => state.setting.postes;
 export const getEtablissement = (state) => state.setting.etablissement;
@@ -149,8 +150,10 @@ export const getBrancheById = (state, id) => {
   const branches = state.setting.branches;
   return branches.filter((branche) => branche._id === id)[0];
 };
+
 export const getPostesById = (state, id) => {
   const postes = state.setting.postes;
   return postes.filter((poste) => poste._id === id)[0];
 };
+
 export default SettingSlice.reducer;

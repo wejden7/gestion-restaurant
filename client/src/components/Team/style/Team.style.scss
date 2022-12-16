@@ -1,0 +1,56 @@
+@import "utils/styles/colors";
+.model-team {
+  .model-team-header {
+    padding: 8px 8px 8px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 1px solid $color-gray-100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .model-team-header-title {
+      color: $color-primary;
+    }
+    button {
+      &::after {
+        content: "\f410";
+        font-family: "Font Awesome 5 Free";
+        font-size: 24px;
+        padding: 0px 6px;
+        font-weight: 900;
+        color: red;
+      }
+    }
+  }
+  
+}
+.btn-save-team {
+  color: white;
+  &::after {
+    content: "\f0fe";
+    font-family: "Font Awesome 5 Free";
+    font-size: 24px;
+    padding: 0px 6px;
+    font-weight: 900;
+  }
+}
+.btn-update-team {
+  flex: 1;
+  color: $color-primary;
+}
+
+
+
+.modal.dark .model-team {
+  .model-team-header {
+    .model-team-header-title {
+      color: white;
+    }
+    button {
+      &::after {
+        color: $color-error;
+      }
+    }
+  }
+
+}

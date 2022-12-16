@@ -47,12 +47,19 @@ const errorHandler = (error, req, res, next) => {
 
 //* Use Routes
 app.use("/api/auth", authRouter);
-app.use("/api",auth,AuthorizationAdminMiddleware, permissionTagsRouter, errorHandler);
+
 app.use("/api", auth, etablissementRouter, errorHandler);
 app.use("/api", auth, brancheRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, postRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, zoneRouter, errorHandler);
 app.use("/api", auth, AuthorizationMiddleware, employerRouter, errorHandler);
+app.use(
+  "/api",
+  auth,
+  AuthorizationAdminMiddleware,
+  permissionTagsRouter,
+  errorHandler
+);
 
 //* 404 Route
 app.use((req, res) => res.status(404).json({ status: "Page not found." }));
