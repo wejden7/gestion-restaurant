@@ -66,6 +66,11 @@
 }
 
 .text-input {
+  input[type="date"]:not(.has-value):before{
+    
+    content: attr(placeholder);
+    padding-right: 8px;
+  }
   .text-input-label {
     position: relative;
 
@@ -113,10 +118,10 @@
     color: $color-primary;
     background: $color-gray-100;
     width: 100%;
-    .MuiOutlinedInput-notchedOutline {
+    &.MuiOutlinedInput-notchedOutline {
       border: 0;
     }
-    .MuiOutlinedInput-input {
+    &.MuiOutlinedInput-input {
       padding-left: 30px;
 
       font-size: 16px;
@@ -134,15 +139,66 @@
         opacity: 0.7;
       }
     }
-    &.Mui-focused  .MuiOutlinedInput-input{
-        &::after {
-          opacity: 1;
-        }
+    &.Mui-focused .MuiOutlinedInput-input {
+      &::after {
+        opacity: 1;
       }
+    }
   }
   .select-input-error {
     @extend .text-error;
     text-align: end !important;
+  }
+}
+.input-select-filter {
+  height: 35px;
+  color: $color-primary;
+  background: $color-gray-100;
+  width: 150px;
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
+  }
+  
+  .MuiOutlinedInput-input {
+    padding-left: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    &::before{
+      color: red;
+    }
+    
+    &::after {
+      content: "\f002";
+      position: absolute;
+      font-family: "Font Awesome 5 Free";
+      font-size: 12px;
+      padding: 0px 6px;
+      font-weight: 900;
+      left: 3px;
+      color: $color-primary;
+      opacity: 0.7;
+    }
+    
+  }
+  &.Mui-focused .MuiOutlinedInput-input {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.dashboard.dark {
+  .input-select-filter {
+    background: $color-light-opacity;
+    color: white;
+    .MuiSelect-icon{
+      color: white;
+    }
+    .MuiOutlinedInput-input {
+      &::after {
+        color: white;
+      }
+    }
   }
 }
 

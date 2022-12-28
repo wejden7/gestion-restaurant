@@ -14,3 +14,24 @@ $color-primary:#242961;
 $color-secondary:#D0BED4;
 $color-gray-100:rgb(232, 232, 232);
 $color-gray-500:gray;
+
+color-guide{
+    .Not-Work {
+        background-color: red;
+      }
+      .Work {
+        background-color: rgb(0, 106, 255);
+      }
+      .Conge-Paye {
+        background-color: green;
+      }
+      .Conge-Not-Paye {
+        background-color: gray;
+      }
+      .conge-Maladie-Certificat {
+        background-color: navy;
+      }
+      .Quite {
+        background-color: orange;
+      }
+}

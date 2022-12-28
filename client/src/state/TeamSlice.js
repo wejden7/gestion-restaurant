@@ -40,14 +40,14 @@ const TeamSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchTeam.fulfilled, (state, action) => {
-        //console.log("team successful");
-        //console.log(action.payload.data);
+        /* console.log("team successful");
+        console.log(action.payload); */
         state.status = "succeeded";
         TeamAdapter.upsertMany(state, action.payload.data);
       })
       .addCase(fetchTeam.rejected, (state, action) => {
-        //console.log("team successful");
-        //console.log(action.payload.data);
+        /*  console.log("team successful");
+        console.log(action.payload); */
         state.status = "failed";
       })
       .addCase(createEmployer.fulfilled, (state, action) => {

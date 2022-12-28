@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,memo} from "react";
 
 // * import Component
 import { ModalComponent } from "components";

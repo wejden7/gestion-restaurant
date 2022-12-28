@@ -14,7 +14,7 @@
   background: radial-gradient(circle, $color-pink-100 0%, $color-blue-900 100%);
   .content {
     background-color: $color-blue-900;
-    padding:  20px;
+    padding: 20px;
     border-radius: 5px;
     width: 350px;
     height: auto;
@@ -23,7 +23,6 @@
       flex-direction: column;
       margin: 20px 0;
       gap: 20px;
-     
     }
     .forgot-password {
       color: white;
@@ -45,7 +44,6 @@
       font-size: 12px;
       text-align: center;
       margin-bottom: 8px;
-    
     }
     .error-form {
       margin-top: 4px;
@@ -85,20 +83,41 @@
         color: $color-pink-100;
         width: 300px;
       }
-      button{
+      button {
         background-color: $color-blue-900;
         padding: 8px 40px;
         border-radius: 20px;
-        color:white;
+        color: white;
         font-weight: 500;
         max-width: max-content;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out 0s;
-        &:hover{
+        &:hover {
           transform: translateY(-7px);
         }
       }
-
     }
+  }
+}
+
+button-login {
+  background-color: $color-blue-900;
+  color: white;
+  width: 166px;
+  text-align: center;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+.button-login-employer {
+  @extend button-login;
+  &.employer {
+    background-color: $color-blue-100;
+  }
+}
+.button-login-admin {
+  @extend button-login;
+  &.admin {
+    background-color: $color-blue-100;
   }
 }

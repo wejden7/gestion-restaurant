@@ -12,6 +12,9 @@ import { createEmployer, updateEmployer } from "state/TeamSlice";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name Poste is reqired"),
   userName: Yup.string().required("userName Poste is reqired"),
+  dateStart:Yup.date()
+  .typeError("Must be a Date type")
+  .required("hour Worked is reqired"),
   timeWork: Yup.object({
     start: Yup.number()
       .typeError("Must be a number type")

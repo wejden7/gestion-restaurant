@@ -5,10 +5,19 @@ const presenceShema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "Employer",
+    unique: true,
   },
   presence: [
     {
       date: {
+        type: Date,
+        required: true,
+      },
+      timeStart: {
+        type: Date,
+        required: true,
+      },
+      timeEnd: {
         type: Date,
         required: true,
       },
@@ -18,12 +27,24 @@ const presenceShema = mongoose.Schema({
       },
       status: {
         type: String,
-        enum: [],
+        enum: [
+          "Work",
+          "Quite",
+          "Not-Work",
+          "Conge-Paye",
+          "Conge-Not-Paye",
+          "conge-Maladie-Certificat",
+        ],
         required: true,
+      },
+      commit: {
+        type: String,
+        default: "",
       },
     },
   ],
 });
+
 const presenceModel = mongoose.model("Presence", presenceShema);
 
 export default presenceModel;

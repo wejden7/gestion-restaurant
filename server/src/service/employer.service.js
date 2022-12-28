@@ -25,3 +25,17 @@ const employerUserEmployer = async (id, user) => {
   if (!employer) return false;
   return true;
 };
+
+export const employersByUser = async (user) => {
+  const etablissement = await etablissementByUserAdmin(user);
+  const branches = await brancheModel
+    .find({ etablissement: etablissement._id })
+    .select("_id");
+  var newtab = [];
+  branches.map((item) => newtab.push(item._id));
+  let employer = await employerModel.find({
+    branche: { $in: newtab },
+  }).select('_id')
+   employer = employer.map((item) =>item._id )
+  return employer
+};

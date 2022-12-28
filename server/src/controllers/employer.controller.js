@@ -1,5 +1,6 @@
 import employerModel from "#models/employer.model.js";
 import brancheModel from "#models/branche.model.js";
+import presenceModel from "#models/presence.model.js";
 
 import { etablissementByUser } from "#service/etablissement.service.js";
 import { brancheUser } from "#service/branche.service.js";
@@ -29,10 +30,11 @@ export const createEmployerController = async (req, res, next) => {
     if (!brancheExiste) return next("branche not found");
     const employerExiste = await employerModel.findOne({ userName });
     if (employerExiste) return next("userName existe");
-    const codeLogin = randomString(8, req.body.name);
+    const codeLogin = randomString(8);
     const salt = bcrypt.genSaltSync(10);
     req.body.codeLogin = bcrypt.hashSync(codeLogin, salt);
     const employer = await employerModel.create(req.body);
+    await presenceModel.create({ employer: employer._id, presence: [] });
 
     return res.status(200).json({
       message: "employer created successfully",
@@ -59,6 +61,7 @@ export const findEmployerController = async (req, res, next) => {
     const employers = await employerModel
       .find({ branche: { $in: branches } })
       .select("-codeLogin");
+      console.log(employers)
     return res.status(200).json({
       message: "Employer deleted successfully",
       data: employers,
@@ -124,7 +127,8 @@ export const updateCodeLoginEmployerController = async (req, res, next) => {
 
     const employer = await employerModel.findById(id);
 
-    const codeLogin = randomString(8, employer.name);
+    const codeLogin = randomString(8);
+    console.log(codeLogin)
     const salt = bcrypt.genSaltSync(10);
     employer.codeLogin = bcrypt.hashSync(codeLogin, salt);
 

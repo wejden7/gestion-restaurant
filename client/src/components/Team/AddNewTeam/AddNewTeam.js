@@ -21,10 +21,8 @@ function AddNewTeam() {
         <div className="model-team">
           <div className="model-team-header">
             <h1 className="model-team-header-title">Add One In Your Team</h1>
-
             <button onClick={handleCloseModal}></button>
           </div>
-
           <form onSubmit={onSubmit} className="form">
             <p className="text-error ">{error?.message}</p>
             <Input.InputText
@@ -32,6 +30,7 @@ function AddNewTeam() {
               name="name"
               errors={errors.name?.message}
               icon="&#xf007;"
+              placeholder="Name"
             />
             <Input.InputSelect
               control={control}
@@ -51,6 +50,14 @@ function AddNewTeam() {
               name="userName"
               errors={errors.userName?.message}
               icon="&#xf007;"
+              placeholder="User Name "
+            />
+            <Input.InputDate
+              register={register}
+              name="dateStart"
+              errors={errors.dateStart?.message}
+              icon="&#xf007;"
+              placeholder="Date to Starte"
             />
 
             <label className="label-group-time-work" htmlFor="">

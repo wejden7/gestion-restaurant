@@ -1,0 +1,64 @@
+@import "utils/styles/colors";
+.presence-team {
+  flex: 1;
+  .hedear {
+    padding: 8px;
+    background-color: white;
+    border-radius: 5px 5px 0px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $color-light-opacity;
+    .titel {
+      font-weight: 500;
+      font-size: 20px;
+    }
+    .filter {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  .team-presence-containte {
+    background-color: $color-gray-100;
+    height: calc(100vh - 120px - 40px);
+    border-radius: 0px 0px 5px 5px;
+    position: relative;
+    padding: 4px 1px;
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-bottom: 60px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .loading {
+      display: grid;
+      height: 100%;
+      justify-content: center;
+      place-items: center;
+    }
+    .guide-color {
+      position: fixed;
+      bottom: 40px;
+      display: grid;
+      text-align: center;
+      grid-template-columns: repeat(3, 1fr);
+      @extend color-guide;
+      .guide-color-item {
+      }
+    }
+  }
+}
+
+.dashboard.dark .presence-team {
+  .hedear {
+    background: $color-light-opacity;
+  }
+  .team-presence-containte {
+    background: $color-light-opacity;
+  }
+}

@@ -23,6 +23,10 @@ const employerShema = mongoose.Schema({
     type: String,
     required: true,
   },
+  dateStart: {
+    type: Date,
+    required: true,
+  },
   timeWork: {
     start: {
       type: Number,

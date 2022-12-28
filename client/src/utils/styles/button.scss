@@ -10,7 +10,7 @@
   font-size: 20px;
   border-radius: 5px;
   background-color: $color-light;
-  &.active{
+  &.active {
     background-color: $color-gray-100;
     color: $color-blue-100;
   }
@@ -26,7 +26,14 @@
   .label-link {
     margin-left: 60px;
     font-size: 14px;
-   // white-space: nowrap;
+    white-space: nowrap;
     font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+}
+.dashboard.side-bar-open .btn-sideBar-default {
+  .label-link {
+    opacity: 1;
   }
 }

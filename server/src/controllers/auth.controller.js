@@ -71,6 +71,7 @@ export const loginController = async (req, res, next) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      createdDate: user.createdDate,
       role: "admin",
     };
     return res.status(201).json({
@@ -84,15 +85,25 @@ export const loginController = async (req, res, next) => {
 };
 export const loginbyTokenController = async (req, res, next) => {
   const { user } = req;
-  console.log(user);
-  const userById = await userModel.findById(user._id);
+
+  let userById;
+  let token;
+  if (user.role === "admin") {
+    console.log(user);
+    userById = await userModel.findById(user._id);
+    token = createToken(userById);
+  } else {
+    userById = await employerModel.findById(user._id);
+    token = createTokenEmplyer(userById);
+  }
   const resault = {
     _id: user._id,
     name: userById.name,
-    email: userById.email,
+    email: userById?.email || userById?.userName,
+    createdDate: userById.createdDate || null,
     role: user.role,
   };
-  const token = createToken(userById);
+
   return res.status(200).json({
     message: "login successfully",
     data: resault,
@@ -185,10 +196,16 @@ export const loginEmployerController = async (req, res, next) => {
       return next("incorrect code Login");
 
     const token = createTokenEmplyer(employer);
-
+    const resault = {
+      _id: employer._id,
+      name: employer.name,
+      email: employer.userName,
+      createdDate: null,
+      role: "Employer",
+    };
     return res.status(201).json({
       message: "login successfully",
-      data: employer,
+      data: resault,
       token: token,
     });
   } catch (error) {

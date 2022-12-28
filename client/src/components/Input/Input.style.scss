@@ -1,0 +1,11 @@
+@import 'utils/styles/colors.scss';
+.input-select {
+    height: 40px;
+    background:$color-gray-100;
+   
+    .MuiOutlinedInput-notchedOutline {
+        border: 0;
+      }
+     
+     
+  }

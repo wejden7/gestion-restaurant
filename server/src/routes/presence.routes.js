@@ -2,13 +2,21 @@ import express from "express";
 
 import {
   errorHandler,
+  addPresenceController,
+  quitePresenceController,
+  updatePresenceController,
   createPresenceController,
+  checkPresenceController,
 } from "#controllers/presence.controller.js";
 
 import {} from "#helpers/validator.js";
 
 const router = express.Router();
 
-router.post("/presence", createPresenceController, errorHandler);
+router.post("/presence/:id", createPresenceController, errorHandler);
+router.post("/presence-work", addPresenceController, errorHandler);
+router.post("/presence-quite", quitePresenceController, errorHandler);
+router.put("/presence/:id", updatePresenceController, errorHandler);
+router.get("/presence", checkPresenceController, errorHandler);
 
 export default router;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
+import withAutorization from "components/Protected/withAutorization";
 import "./Setting.style.scss";
 function Setting() {
   let activeClassName = "underline";
@@ -35,4 +36,4 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default withAutorization(Setting,"setting",true) ;

@@ -1,0 +1,50 @@
+@import "utils/styles/colors";
+.presence-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: whitesmoke;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    .titel-item {
+      font-size: 18px;
+    }
+    .periode {
+      font-size: 12px;
+      color: $color-gray-500;
+    }
+  }
+
+  .date {
+    display: flex;
+    justify-content: center;
+    @extend color-guide;
+    .daye {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      border-left: 1px solid $color-gray-500;
+
+      &:first-child {
+        border-left: none;
+      }
+      &.sup {
+        opacity: 0.3;
+        cursor: no-drop;
+      }
+    }
+  }
+}
+.dashboard.dark .presence-item {
+  background-color: $color-light-opacity;
+  .titel-item {
+  }
+  .periode {
+    color: whitesmoke;
+  }
+}
