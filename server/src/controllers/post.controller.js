@@ -84,7 +84,7 @@ export const findAllPostController = async (req, res, next) => {
     const post = await postModel
       .find({ etablissement: etablissement._id })
       .populate("etablissement");
-    if (post.length === 0) return next("post not found");
+   // if (post.length === 0) return next("post not found");
 
     return res.status(200).json({
       message: "post find successfully",

@@ -1,0 +1,116 @@
+@import "utils/styles/colors.scss";
+.iam-presant-quite {
+  width: 300px;
+  padding: 15px 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px $color-gray-500;
+  display: grid;
+  place-items: center;
+  .present {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    .fingre {
+      position: relative;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      background: $color-light;
+      overflow: hidden;
+      &::after {
+        content: "\f577";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 50px;
+        color: white;
+      }
+      &.succed {
+        &::after {
+          content: "\2713";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          font-size: 50px;
+          color: green;
+        }
+      }
+      &.clicked {
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          width: 100%;
+          height: 3px;
+          background-color: rgba(255, 0, 0, 0.232);
+          animation: scaner 1s ease-in-out infinite;
+        }
+      }
+    }
+    & > h1 {
+      color: $color-blue-900;
+      font-weight: 500;
+    }
+  }
+  .checked {
+    text-align: center;
+    & > h1 {
+      color: $color-blue-900;
+      font-weight: 500;
+    }
+    & > p {
+      color: $color-gray-500;
+    }
+  }
+}
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgb(130, 136, 195);
+  }
+}
+@keyframes scaner {
+  0% {
+    top: 0;
+    bottom: 100%;
+  }
+  100% {
+    top: 100%;
+    bottom: 0;
+  }
+}
+
+.dashboard.dark {
+  .iam-presant-quite {
+    background: $color-light-opacity;
+    box-shadow: none;
+    .present {
+      .fingre {
+        background: $color-light-opacity;
+      }
+      & > h1 {
+        color: white;
+      }
+    }
+    .checked {
+      & > h1 {
+        color: white;
+      }
+    }
+  }
+}

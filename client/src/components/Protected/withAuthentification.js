@@ -1,16 +1,24 @@
-import React from "react";
-import { getUser, getloding } from "state/AuthSlice";
+import React, { useEffect } from "react";
+import { getUser, getloding, getOut } from "state/AuthSlice";
+import { Error404Path } from "utils/router/path.utils";
 import { useSelector } from "react-redux";
 import { DashboardContext } from "context/contextDaschboard";
-import { error } from "pages";
 import { Loder } from "components";
+import { useNavigate } from "react-router-dom";
+
 export default function withAuthentification(Component) {
   return (props) => {
     const user = useSelector(getUser);
     const loding = useSelector(getloding);
-    if (loding) return <Loder />;
+    const out = useSelector(getOut);
+    const navigate = useNavigate();
 
-    if (!user) return <error.NotFound />;
+    useEffect(() => {
+      if (!user && !loding && !out) navigate(Error404Path);
+      else if (!user && !loding && out) navigate("/");
+    }, [user, loding, out]);
+
+    if (loding) return <Loder />;
 
     if (user)
       return (

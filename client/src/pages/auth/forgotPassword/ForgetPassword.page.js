@@ -2,7 +2,7 @@ import React from "react";
 import { InputAuth } from "components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import {loginPath,registerPath} from 'utils/router/pathRouter.util'
+import {loginPath,registerPath} from 'utils/router/path.utils'
 import useForgotPassword from "Hooks/UseForgetPassword";
 const { EmailInput, SubmitInput } = InputAuth;
 

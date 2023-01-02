@@ -14,15 +14,10 @@ var opts = {
 
 export default new JwtStrategy(opts, async function (jwt_payload, done) {
   try {
-    const user = await userModel.findOne({ _id: jwt_payload.id });
-    const employer = await employerModel.findById(jwt_payload.id);
+  
 
-    if (user) {
-      const newuser = { _id: user.id, role: jwt_payload.role };
-      return done(null, newuser);
-    } else if (employer) {
-      const newemployer = { _id: employer.id, role: jwt_payload.role };
-      return done(null, newemployer);
+    if (jwt_payload) {
+      return done(null, jwt_payload);
     } else {
       return done(true, false);
       // or you could create a new account

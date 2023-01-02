@@ -17,7 +17,7 @@ export default createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
-  
+
     children: [
       {
         index: true,

@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { forgotPasswordApi } from "utils/apis/auth.api";
 import { useNavigate } from "react-router-dom";
-import {VerificationCodePAth} from 'utils/router/pathRouter.util'
+import {VerificationCodePAth} from 'utils/router/path.utils'
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is reqired"),
 });

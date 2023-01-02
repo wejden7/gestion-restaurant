@@ -8,7 +8,7 @@ import {
 import { FiActivity } from "react-icons/fi";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BtnLink, BtnMode, BtnList } from "components";
-import { DashboardTeamPAth, DashboardPAth } from "utils/router/pathRouter.util";
+import { DashboardTeamPAth, DashboardPAth } from "utils/router/path.utils";
 
 import "./SideBar.style.scss";
 const links = [

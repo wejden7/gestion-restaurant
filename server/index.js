@@ -49,20 +49,18 @@ const errorHandler = (error, req, res, next) => {
 //* Use Routes
 app.use("/api/auth", authRouter);
 
-app.use("/api", auth, etablissementRouter, errorHandler);
-app.use("/api", auth, brancheRouter, errorHandler);
-app.use("/api", auth, autorizationRouter, errorHandler);
-app.use("/api", auth, AuthorizationMiddleware, postRouter, errorHandler);
-app.use("/api", auth, AuthorizationMiddleware, zoneRouter, errorHandler);
-app.use("/api", auth, AuthorizationMiddleware, employerRouter, errorHandler);
-app.use("/api", auth, AuthorizationMiddleware, presenceRouter, errorHandler);
-app.use(
-  "/api",
-  auth,
-  AuthorizationAdminMiddleware,
-  permissionTagsRouter,
-  errorHandler
-);
+app.use("/api", auth);
+app.use("/api", etablissementRouter);
+app.use("/api", brancheRouter);
+app.use("/api", autorizationRouter);
+app.use("/api", AuthorizationMiddleware);
+app.use("/api", postRouter);
+app.use("/api", zoneRouter);
+app.use("/api", employerRouter);
+app.use("/api", presenceRouter);
+app.use("/api", AuthorizationAdminMiddleware);
+app.use("/api", permissionTagsRouter);
+app.use("/api", errorHandler);
 
 //* 404 Route
 app.use((req, res) => res.status(404).json({ status: "Page not found." }));
@@ -78,13 +76,13 @@ const initializeApp = async () => {
     const io = new Server(server, { cors: { origin: "*" } });
 
     io.on("connection", function (socket) {
-      console.log(socket.id);
-      socket.on("room", (data) => {
+      console.log("connection : " + socket.id);
+
+      socket.on("join-room", (data) => {
         socket.join(data);
       });
-      console.log("Made socket connection");
+
       socket.on("UPDATE-PRESENCE", (data) => {
-        console.log("Updated presence");
         io.in(data).emit("RELODE-PRESECE", "room");
       });
     });

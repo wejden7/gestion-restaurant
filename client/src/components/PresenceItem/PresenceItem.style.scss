@@ -1,7 +1,9 @@
 @import "utils/styles/colors";
 .presence-item {
+  
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 4px;
   background-color: whitesmoke;
   .header {
@@ -20,10 +22,11 @@
 
   .date {
     display: flex;
+    width: 100%;
     justify-content: center;
     @extend color-guide;
     .daye {
-      width: 20px;
+      flex: 1;
       height: 20px;
       display: grid;
       place-items: center;

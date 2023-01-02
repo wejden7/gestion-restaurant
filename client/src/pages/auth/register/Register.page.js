@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useRegister from "Hooks/UseRegister";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { loginPath } from "utils/router/pathRouter.util";
+import { loginPath } from "utils/router/path.utils";
 const { TextInputName, EmailInput, PasswordInput, SubmitInput } = InputAuth;
 
 const RegisterContent = ({ useOther }) => {

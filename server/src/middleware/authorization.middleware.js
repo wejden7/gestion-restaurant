@@ -1,7 +1,6 @@
 import employerModel from "#models/employer.model.js";
 
 export const AuthorizationMiddleware = async (req, res, next) => {
-  console.log("Authorization middleware");
   let { method, url, originalUrl, user } = req;
 
   if (user.role === "admin") return next();
@@ -31,7 +30,6 @@ export const AuthorizationMiddleware = async (req, res, next) => {
 };
 
 export const AuthorizationAdminMiddleware = async (req, res, next) => {
-  console.log("Authorization middleware");
   const { method, url, originalUrl, user } = req;
 
   if (user.role === "admin") return next();

@@ -5,20 +5,20 @@ import "./Dashboard.style.scss";
 import { UseStateDashboardContext } from "context/contextDaschboard";
 import withAuthentification from "components/Protected/withAuthentification";
 import withAutorization from "components/Protected/withAutorization";
-import { DashboardSettingPath } from "utils/router/pathRouter.util";
+import { DashboardSettingPath } from "utils/router/path.utils";
 import { fetchTeam } from "state/TeamSlice";
 import { findAutorization } from "state/AutorizationSlice";
 import { findBranche, findEtablissement, findPoste } from "state/SettingSlice";
 import { store } from "state/store";
-let ButtonSeeting  =()=>{
+
+let ButtonSeeting = () => {
   const navigate = useNavigate();
   const onClick = () => {
     navigate(DashboardSettingPath);
   };
-  return <button onClick={onClick} className="btn-setting"></button>
-
-}
-ButtonSeeting = withAutorization(ButtonSeeting,"seeting")
+  return <button onClick={onClick} className="btn-setting"></button>;
+};
+ButtonSeeting = withAutorization(ButtonSeeting, "seeting");
 function Dashboard(props) {
   const { open, mode } = UseStateDashboardContext();
 
@@ -40,13 +40,12 @@ function Dashboard(props) {
     });
   }, []);
 
-  
   return fetch ? (
     <div className={`dashboard ${mode} ${open && "side-bar-open"} `}>
       <NavBar />
       <Outlet />
-      <ButtonSeeting/>
-   
+      <ButtonSeeting />
+
       <SideBar />
     </div>
   ) : (

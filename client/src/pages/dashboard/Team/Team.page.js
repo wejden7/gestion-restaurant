@@ -8,6 +8,7 @@ function Team() {
     <div className="content-dashboard content-dashboard-Team">
       <TeamComponent.TeamList />
       <TeamComponent.TeamPresence />
+
     </div>
   );
 }

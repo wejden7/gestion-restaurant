@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ModalComponent } from "components";
 import useModel from "Hooks/useModel";
 import BarLoader from "react-spinners/BarLoader";
-import { Input } from "../";
+import { Input } from "components";
 import { useSelector } from "react-redux";
 import { getPostes, getBranches } from "state/SettingSlice";
 import useFormTeam from "Hooks/UseFormTeam";
@@ -32,13 +32,13 @@ function AddNewTeam() {
               icon="&#xf007;"
               placeholder="Name"
             />
-            <Input.InputSelect
+            <Input.InputSelectLabel
               control={control}
               data={postes}
               name="post"
               errors={errors.post?.message}
             />
-            <Input.InputSelect
+            <Input.InputSelectLabel
               control={control}
               data={Branches}
               name="branche"

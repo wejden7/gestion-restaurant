@@ -13,7 +13,8 @@ export { default as Drawer } from "./Drawer/Drawer.js";
 export { default as PresenceItem } from "./PresenceItem/PresenceItem.js";
 export { default as MapItem } from "./MapItem/MapItem.js";
 export { default as PresenceDetail } from "./PresenceDetail/PresenceDetail.js";
-export { default as Loder } from "./Loader/Loader.js"
+export { default as Loder } from "./Loader/Loader.js";
+export { default as Presance } from "./Presance/Presance.js";
 export * as InputAuth from "./InputAuth/InputAuth";
 export * as Branche from "./Branche";
 export * as Poste from "./Poste";

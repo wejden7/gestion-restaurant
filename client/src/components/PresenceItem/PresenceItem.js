@@ -35,7 +35,7 @@ const ListeDate = ({ presence, employers, date }) => {
   const [selected, setSelected] = useState();
 
   const condition = (days) =>
-    moment(employers.dateStart).isAfter(_date.getDateDayFormat(date, days));
+    moment(employers?.dateStart).isAfter(_date.getDateDayFormat(date, days));
 
   const selectPresence = (days) => {
     return presence.find((i) => _date.same(i.date, days, date));
@@ -76,7 +76,7 @@ const PresenceItem = ({ presence, employer, date }) => {
   return (
     <div className="presence-item">
       <div className="header">
-        <h1 className="titel-item">{employers.name}</h1>
+        <h1 className="titel-item">{employers?.name}</h1>
         <span className="periode">
           De {date} A {endOfMonth}
         </span>

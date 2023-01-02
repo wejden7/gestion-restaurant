@@ -1,9 +1,10 @@
 import Modal from "@mui/material/Modal";
 import React from "react";
+
 import { UseStateDashboardContext } from "context/contextDaschboard";
 import "./Modal.style.scss";
-function ModalComponent({ children ,openModal,handleCloseModal}) {
-  const {   mode} = UseStateDashboardContext();
+function ModalComponent({ children, openModal, handleCloseModal }) {
+  const { mode } = UseStateDashboardContext();
   return (
     <Modal
       open={openModal}
@@ -11,7 +12,7 @@ function ModalComponent({ children ,openModal,handleCloseModal}) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div  className={`modal ${mode}`}>{children}</div>
+      <div className={`modal ${mode}`}>{children}</div>
     </Modal>
   );
 }

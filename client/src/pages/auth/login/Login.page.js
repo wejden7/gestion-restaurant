@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useLogin from "Hooks/UseLogin";
 import useLoginEmployer from "Hooks/UseLoginEmployer";
-import { registerPath, ForgetPasswordPath } from "utils/router/pathRouter.util";
+import { registerPath, ForgetPasswordPath } from "utils/router/path.utils";
 const { EmailInput, PasswordInput, SubmitInput, TextInputName } = InputAuth;
 
 const LoginAdmin = () => {

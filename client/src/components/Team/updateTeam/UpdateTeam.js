@@ -2,7 +2,7 @@ import React, { useState,memo} from "react";
 
 // * import Component
 import { ModalComponent } from "components";
-import { Input } from "../";
+import { Input } from "components";
 
 // * import Hooks
 import useFormTeam from "Hooks/UseFormTeam";
@@ -27,7 +27,7 @@ function UpdateTeam({ dataTeam }) {
   const [isdelete, setIsDelete] = useState(false);
   const { isFetching, refetch, data } = UseRefrecherCodeApi(dataTeam._id);
   const { openModal, handleOpenModal, handleCloseModal } = useModel();
-  const { InputSelect, InputText } = Input;
+  const { InputSelectLabel, InputText } = Input;
   const { register, onSubmit, errors, isSubmitting, error, control } =
     useFormTeam(dataTeam, true);
 
@@ -63,13 +63,13 @@ function UpdateTeam({ dataTeam }) {
               errors={errors.name?.message}
               icon="&#xf007;"
             />
-            <InputSelect
+            <InputSelectLabel
               control={control}
               data={postes}
               name="post"
               errors={errors.post?.message}
             />
-            <InputSelect
+            <InputSelectLabel
               control={control}
               data={Branches}
               name="branche"

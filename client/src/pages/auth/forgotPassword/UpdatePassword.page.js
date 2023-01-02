@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import useUpdatePassword from "Hooks/UseUpdatePassword";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import {loginPath,registerPath,Error404Path}from 'utils/router/pathRouter.util'
+import {loginPath,registerPath,Error404Path}from 'utils/router/path.utils'
 const { PasswordInput, SubmitInput } = InputAuth;
 
 const UpdatePasworedContent = ({ useOther }) => {

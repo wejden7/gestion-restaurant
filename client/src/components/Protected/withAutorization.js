@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Error404Path } from "utils/router/pathRouter.util";
+import { Error404Path } from "utils/router/path.utils";
 import { useSelector } from "react-redux";
 import { getUser } from "state/AuthSlice";
 import { selectSiAutorized } from "state/AutorizationSlice";

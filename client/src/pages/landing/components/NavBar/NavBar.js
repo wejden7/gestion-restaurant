@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { loginPath, registerPath } from "utils/router/pathRouter.util";
+import { loginPath, registerPath } from "utils/router/path.utils";
 import { getUser } from "state/AuthSlice";
 import { AvatarUser } from "components";
 import "./NavBar.style.scss";

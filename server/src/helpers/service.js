@@ -1,13 +1,8 @@
 import Jwt from "jsonwebtoken";
 import moment from "moment-timezone";
+import bcrypt from "bcryptjs";
 
-export const createToken = (user) => {
-  const payload = {
-    username: user.name,
-    email: user.email,
-    role: "admin",
-    id: user._id,
-  };
+export const createToken = (payload) => {
   return Jwt.sign(payload, process.env.KEY_JWT, { expiresIn: "1d" });
 };
 export const createTokenEmplyer = (employer) => {
@@ -36,4 +31,13 @@ export const durationHourUpdate = (date) => {
   const end = moment(new Date()); // another date
   const duration = moment.duration(end.diff(now));
   return duration.asHours();
+};
+
+export const bcryptService = (text) => {
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(text, salt);
+};
+
+export const bcryptServiceCompar = (text, textCrypte) => {
+  return bcrypt.compareSync(text, textCrypte);
 };

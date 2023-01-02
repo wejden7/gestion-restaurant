@@ -6,7 +6,7 @@ import {
   loginPath,
   registerPath,
   Error404Path,
-} from "utils/router/pathRouter.util";
+} from "utils/router/path.utils";
 import useVerificationCode from "Hooks/UseVerificationCode";
 const { TextInputCode, SubmitInput } = InputAuth;
 

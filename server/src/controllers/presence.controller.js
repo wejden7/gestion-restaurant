@@ -1,6 +1,6 @@
 import presenceModel from "#models/presence.model.js";
 import moment from "moment-timezone";
-
+import { Socket } from "socket.io";
 // * Import service
 import {} from "#helpers/service.js";
 import { employersByUser } from "#service/employer.service.js";
@@ -21,9 +21,9 @@ export const errorHandler = async (error, req, res, next) => {
 };
 
 export const addPresenceController = async (req, res, next) => {
-  const { _id } = req.user;
-
+  const { _id, role } = req.user;
   try {
+    if (role === "admin") return next("Admin dont be accesse");
     const date = moment.tz(new Date(), "Africa/Tunis").startOf("day").format();
     const start_Work = moment.tz(new Date(), "Africa/Tunis").format();
     const end_Work = moment
@@ -36,7 +36,7 @@ export const addPresenceController = async (req, res, next) => {
       presence: { $elemMatch: { date: date } },
     });
 
-    if (existe) return next("date existe ");
+    if (existe) return next("We are checked go to Gerent");
     const newPresence = {
       date: date,
       timeStart: start_Work,
@@ -47,8 +47,32 @@ export const addPresenceController = async (req, res, next) => {
     const presence = await createPresence(_id, newPresence);
 
     return res.status(200).json({
-      message: "create presence successfully",
-      data: presence,
+      message: "Cheked successfully",
+      data: true,
+    });
+  } catch (error) {
+    return next(error.message);
+  }
+};
+export const checkMePresanceController = async (req, res, next) => {
+  const { _id, role } = req.user;
+  try {
+    if (role === "admin") return next("Admin dont be accesse");
+    const date = moment.tz(new Date(), "Africa/Tunis").startOf("day").format();
+
+    const existe = await await presenceModel.findOne({
+      employer: _id,
+      presence: { $elemMatch: { date: date } },
+    });
+
+   if (existe) {
+    var presance = existe.presence.find((item) =>
+      moment(item.date).isSame(date)
+    );
+}
+    return res.status(200).json({
+      message: "Cheked successfully",
+      data: presance?.status || null,
     });
   } catch (error) {
     return next(error.message);
@@ -74,7 +98,7 @@ export const quitePresenceController = async (req, res, next) => {
     if (presence_of_day.status != "Work")
       return next("you are not peresent for quite");
 
-    presence_of_day = updatePresence({
+    presence_of_day = updatePresence(presence_of_day,{
       timeEnd: end_Work,
       status: "Quite",
       commit: "JE Quite",
@@ -83,7 +107,7 @@ export const quitePresenceController = async (req, res, next) => {
     await presence.save();
 
     return res.status(200).json({
-      message: "create presence successfully",
+      message: " quite successfully",
       data: presence,
     });
   } catch (error) {
@@ -121,8 +145,8 @@ export const createPresenceController = async (req, res, next) => {
   if (!err.isEmpty()) return next(err.errors);
   const { id } = req.params;
   const { date, timeStart, timeEnd, status, commit } = req.body;
-  console.log(req.body)
-  console.log(id)
+  console.log(req.body);
+  console.log(id);
   try {
     const presence = await createPresence(id, req.body);
     return res.status(200).json({
@@ -141,7 +165,6 @@ export const checkPresenceController = async (req, res, next) => {
     const presence = await presenceModel.find({
       employer: { $in: employers },
     });
-
     return res.status(200).json({
       message: "create presence successfully",
       data: presence,

@@ -1,7 +1,8 @@
 import employerModel from "#models/employer.model.js";
-import brancheModel from "#models/branche.model.js";
 import userModel from "#models/user.model.js";
-
+import etablissementModel from "#models/etablissement.model.js";
+import brancheModel from "#models/branche.model.js";
+import zoneModel from "#models/zone.model.js";
 export const etablissementByUser = async (user) => {
   if (user.role === "admin") return await etablissementByUserAdmin(user);
   return await etablissementByUserEmployer(user);
@@ -20,5 +21,20 @@ export const etablissementByUserEmployer = async ({ _id }) => {
     .populate("etablissement");
   const { etablissement } = branche_;
 
+  return etablissement;
+};
+
+export const createDefaultEtablissement = async () => {
+  const etablissement = await etablissementModel.create({
+    label: "restaurant",
+  });
+  const branche = await brancheModel.create({
+    label: "restaurant 1",
+    etablissement: etablissement._id,
+  });
+  const zone = await zoneModel.create({
+    label: "zone1",
+    branche: branche._id,
+  });
   return etablissement;
 };

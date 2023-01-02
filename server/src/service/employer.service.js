@@ -27,15 +27,28 @@ const employerUserEmployer = async (id, user) => {
 };
 
 export const employersByUser = async (user) => {
+  if (user.role === "admin") return await employersByUserAdmin(user);
+  return await employersByUserEmployer(user);
+};
+
+const employersByUserAdmin = async (user) => {
   const etablissement = await etablissementByUserAdmin(user);
   const branches = await brancheModel
     .find({ etablissement: etablissement._id })
     .select("_id");
   var newtab = [];
   branches.map((item) => newtab.push(item._id));
-  let employer = await employerModel.find({
-    branche: { $in: newtab },
-  }).select('_id')
-   employer = employer.map((item) =>item._id )
-  return employer
+  let employer = await employerModel
+    .find({
+      branche: { $in: newtab },
+    })
+    .select("_id");
+  employer = employer.map((item) => item._id);
+  return employer;
+};
+const employersByUserEmployer = async (user) => {
+  const { branche } = await employerModel.findOne({ _id: user._id });
+  const employer = await employerModel.find({ branche: branche });
+
+  return employer;
 };

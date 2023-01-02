@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { InputSelectFilter, InputSelectMois } from "../Input";
+
 import { PresenceItem, MapItem, Input } from "components";
 import { UseGetPresence } from "utils/apis/presence.api";
 import { useSelector } from "react-redux";
@@ -10,12 +10,14 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { socket } from "utils/service/socket";
 import { status } from "utils/Data/Data";
 import "./TeamPresence.style.scss";
-import UseAutorization from 'components/Protected/withAutorization'
+import UseAutorization from "components/Protected/withAutorization";
 const option = (Month) => ({
   defaultValues: { team: "all", mois: Month },
 });
 
+
 const TeamPresence = () => {
+  const { InputSelectFilter, InputSelectMois } = Input
   const Month = moment().startOf("month").format("YYYY-MM-DD");
   const teams = useSelector(selectAllTeam);
   const { control, watch } = useForm(option(Month));
@@ -25,15 +27,9 @@ const TeamPresence = () => {
   useEffect(() => {
     socket.on("RELODE-PRESECE", (room) => {
       console.log("relode client");
-
       refetch();
     });
-    return () => {
-      socket.off("connection", () => {
-        console.log("socket.io-client distroy");
-      });
-    };
-  }, [socket]);
+  }, []);
 
   const render = !isSuccess ? (
     <div className="loading">
@@ -69,7 +65,4 @@ const TeamPresence = () => {
   );
 };
 
-export default  UseAutorization(TeamPresence,
-  "select presence"
-
-);
+export default UseAutorization(TeamPresence, "select presence");

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { AiOutlineSetting, AiOutlineMessage,AiOutlinePoweroff } from "react-icons/ai";
+import {
+  AiOutlineSetting,
+  AiOutlineMessage,
+  AiOutlinePoweroff,
+} from "react-icons/ai";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {logOut} from 'state/AuthSlice'
-import {DashboardPAth} from "utils/router/pathRouter.util"
+import { logOut } from "state/AuthSlice";
+import { DashboardPAth } from "utils/router/path.utils";
 import "./AvatarUser.style.scss";
 
 const profileUrl =
@@ -12,21 +16,21 @@ const profileUrl =
 
 function AvatarUser({ user }) {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onClickDrop = () => {
     setOpen((l) => !l);
   };
 
-  const signOut = () =>{
-    dispatch(logOut())
-  }
+  const signOut = () => {
+    dispatch(logOut());
+  };
   return (
     <div className="Avatar-user">
       <img onClick={onClickDrop} src={profileUrl} alt="Profil url" />
       {open && (
         <div className="Avatar-user-dropdown">
           <h1>{user.name}</h1>
-          <h3>{user.email}</h3>
+          <h3>{user.TextLogin}</h3>
           <h2>{user.role}</h2>
           <div className="divider" />
           <Link className="link">
@@ -44,7 +48,9 @@ function AvatarUser({ user }) {
             <AiOutlinePoweroff /> Sign Out
           </button>
           <div className="divider" />
-          <Link to={DashboardPAth} className="btn-dashboard">Dashboard</Link>
+          <Link to={DashboardPAth} className="btn-dashboard">
+            Dashboard
+          </Link>
         </div>
       )}
     </div>

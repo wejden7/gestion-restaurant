@@ -61,7 +61,6 @@ export const findEmployerController = async (req, res, next) => {
     const employers = await employerModel
       .find({ branche: { $in: branches } })
       .select("-codeLogin");
-      console.log(employers)
     return res.status(200).json({
       message: "Employer deleted successfully",
       data: employers,
