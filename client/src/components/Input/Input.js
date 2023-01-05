@@ -50,23 +50,40 @@ export const InputText = ({ register, name, errors, icon, placeholder }) => {
     </div>
   );
 };
-export const InputDate = ({ register, name, errors, icon, placeholder }) => {
+export const InputDate = ({ control, name, errors, icon, placeholder }) => {
   return (
     <div className="text-input">
       <label className="text-input-label" icon={icon} htmlFor="">
-        <input
-          {...register(name)}
-          className="input-text"
-          type="date"
-          min={moment().startOf("days").format("yyyy-MM-DD")}
-          placeholder={placeholder}
+        <Controller
+          control={control} 
+          name={name}
+          render={({ ref, field }) => (
+            <input
+              value={
+                moment(field.value).startOf("days").format("yyyy-MM-DD") || ""
+              }
+              className="input-text"
+              type="date"
+              onChange={(val) => {
+                field.onChange(val);
+              }}
+              min={moment().startOf("days").format("yyyy-MM-DD")}
+              placeholder={placeholder}
+            />
+          )}
         />
       </label>
       <p className="text-input-error">{errors}</p>
     </div>
   );
 };
-export const InputSelectLabel = ({ control, name, data, errors }) => {
+export const InputSelectLabel = ({
+  control,
+  name,
+  data,
+  errors,
+  placeholder,
+}) => {
   return (
     <div className="select-input-group">
       <Controller
@@ -82,10 +99,10 @@ export const InputSelectLabel = ({ control, name, data, errors }) => {
             }}
           >
             <MenuItem className="item" value="-1">
-              Select post
+              {placeholder}
             </MenuItem>
             {data.map((item, index) => (
-              <MenuItem key={index} value={item._id}>
+              <MenuItem key={index} value={item._id || item.value}>
                 {item.label || item.name}
               </MenuItem>
             ))}

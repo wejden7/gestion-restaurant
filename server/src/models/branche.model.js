@@ -10,6 +10,12 @@ const brancheShema = mongoose.Schema({
     required: true,
     ref: "Etablissement",
   },
+  adresse: {
+    type: String,
+  },
+  tel: {
+    type: String,
+  },
 });
 
 const brancheModel = mongoose.model("Branche", brancheShema);

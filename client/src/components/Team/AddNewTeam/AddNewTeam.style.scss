@@ -1,0 +1,91 @@
+@import "utils/styles/colors";
+.btn-save-team {
+  &::after {
+    content: "\f0fe";
+    font-family: "Font Awesome 5 Free";
+    font-size: 24px;
+    padding: 0px 6px;
+    font-weight: 900;
+  }
+}
+.succed {
+  width: 1000px;
+  height: 500px;
+  display: grid;
+  place-items: center;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .cadre {
+      background: $color-gray-100;
+      height: 150px;
+      width: 250px;
+      padding: 8px 8px;
+      border-radius: 5px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      &::after {
+        content: attr(code);
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        border-radius: 5px;
+        place-items: center;
+        background: $color-gray-100;
+        font-size: 60px;
+        font-weight: 700;
+        font-family: "Times New Roman", Times, serif;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        background: linear-gradient($color-blue-900, $color-error);
+        height: 300px;
+        top: -75px;
+        width: 50px;
+        animation: showSuccess 2s linear infinite;
+      }
+      @keyframes showSuccess {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(359deg);
+        }
+      }
+    }
+    & > button {
+      height: 40px;
+      border-radius: 5px;
+      padding: 0 20px;
+      color: $color-primary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-light-opacity;
+    }
+  }
+}
+
+.modal.dark {
+  .succed {
+    & > div {
+      & > button {
+        color: white;
+      }
+      .cadre {
+        background: $color-light-opacity;
+        &::after {
+          background: $color-light;
+        }
+      }
+    }
+  }
+}

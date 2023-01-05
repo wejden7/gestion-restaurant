@@ -1,93 +1,45 @@
-import React, { useEffect } from "react";
-import { ModalComponent } from "components";
-import useModel from "Hooks/useModel";
+import React from "react";
 import BarLoader from "react-spinners/BarLoader";
-import { Input } from "components";
-import { useSelector } from "react-redux";
-import { getPostes, getBranches } from "state/SettingSlice";
 import useFormTeam from "Hooks/UseFormTeam";
+import FormInput from "../Form/FormInput";
+import ModelForm from "../Form/FormModel";
+
+import "./AddNewTeam.style.scss";
+
+const option = {
+  branche: "-1",
+  post: "-1",
+  holiday: "-1",
+  salaryType: "-1",
+  familyStatus: { status: "-1" },
+};
+const Form = () => {
+  const { onSubmit, isSubmitting, error, code, clearCodel, ...other } =
+    useFormTeam(option, false);
+
+  return code.length === 0 ? (
+    <form onSubmit={onSubmit} className="form">
+      <p className="text-error ">{error?.message}</p>
+      <FormInput useForm={other} />
+      <button type="submit" className="btn-save">
+        {!isSubmitting ? "save" : <BarLoader color="#fefbd8" />}
+      </button>
+    </form>
+  ) : (
+    <div className="succed">
+      <div>
+        <div class="cadre" code={code}></div>
+        <button onClick={clearCodel}>New</button>
+      </div>
+    </div>
+  );
+};
 
 function AddNewTeam() {
-  const { register, onSubmit, errors, isSubmitting, error, code, control } =
-    useFormTeam({ branche: "-1", post: "-1" }, false);
-  const postes = useSelector(getPostes);
-  const Branches = useSelector(getBranches);
-  const { openModal, handleOpenModal, handleCloseModal } = useModel();
-
   return (
-    <>
-      <button onClick={handleOpenModal} className="btn-save-team"></button>
-      <ModalComponent openModal={openModal} handleCloseModal={handleCloseModal}>
-        <div className="model-team">
-          <div className="model-team-header">
-            <h1 className="model-team-header-title">Add One In Your Team</h1>
-            <button onClick={handleCloseModal}></button>
-          </div>
-          <form onSubmit={onSubmit} className="form">
-            <p className="text-error ">{error?.message}</p>
-            <Input.InputText
-              register={register}
-              name="name"
-              errors={errors.name?.message}
-              icon="&#xf007;"
-              placeholder="Name"
-            />
-            <Input.InputSelectLabel
-              control={control}
-              data={postes}
-              name="post"
-              errors={errors.post?.message}
-            />
-            <Input.InputSelectLabel
-              control={control}
-              data={Branches}
-              name="branche"
-              errors={errors.branche?.message}
-            />
-
-            <Input.InputText
-              register={register}
-              name="userName"
-              errors={errors.userName?.message}
-              icon="&#xf007;"
-              placeholder="User Name "
-            />
-            <Input.InputDate
-              register={register}
-              name="dateStart"
-              errors={errors.dateStart?.message}
-              icon="&#xf007;"
-              placeholder="Date to Starte"
-            />
-
-            <label className="label-group-time-work" htmlFor="">
-              Time Work :
-            </label>
-            <div className="input-group-time-work">
-              <Input.InputText
-                register={register}
-                name="timeWork.start"
-                errors={errors.timeWork?.start?.message}
-                icon="&#xf251;"
-              />
-              <Input.InputText
-                register={register}
-                name="timeWork.end"
-                errors={errors.timeWork?.end?.message}
-                icon="&#xf253;"
-              />
-            </div>
-            <div className="code-login" htmlFor="file-team">
-              <span className={`icon `}></span>
-              <span className="span-text">code de login : {code}</span>
-            </div>
-            <button type="submit" className="btn-save">
-              {!isSubmitting ? "save" : <BarLoader color="#fefbd8" />}
-            </button>
-          </form>
-        </div>
-      </ModalComponent>
-    </>
+    <ModelForm titel="Add" btnContent="" btnClass="btn-save-team">
+      <Form />
+    </ModelForm>
   );
 }
 

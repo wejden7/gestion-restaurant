@@ -15,13 +15,11 @@ export const updateEtablissementController = async (req, res, next) => {
   const err = validationResult(req);
   if (!err.isEmpty()) return next(err.errors);
 
-  const { label } = req.body;
-
   try {
     const { _id } = await etablissementByUser(req.user);
     const etablissement = await etablissementModel.findByIdAndUpdate(
       _id,
-      { label },
+      req.body,
       { new: true }
     );
     return res.status(200).json({
@@ -34,7 +32,6 @@ export const updateEtablissementController = async (req, res, next) => {
 };
 
 export const findEtablissementController = async (req, res, next) => {
- 
   try {
     const { _id } = await etablissementByUser(req.user);
     const etablissement = await etablissementModel.findById(_id);

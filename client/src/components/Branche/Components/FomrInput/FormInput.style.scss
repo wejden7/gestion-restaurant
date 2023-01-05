@@ -1,0 +1,14 @@
+.input-zone {
+  position: relative;
+  & > span {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    &::after {
+      content: "\f00d";
+      font-family: "Font awesome 5 Free";
+      font-weight: 600;
+      color: red;
+    }
+  }
+}

@@ -3,6 +3,8 @@ import userModel from "#models/user.model.js";
 import etablissementModel from "#models/etablissement.model.js";
 import brancheModel from "#models/branche.model.js";
 import zoneModel from "#models/zone.model.js";
+
+import parametresModel from "#models/parametres.model.js";
 export const etablissementByUser = async (user) => {
   if (user.role === "admin") return await etablissementByUserAdmin(user);
   return await etablissementByUserEmployer(user);
@@ -36,5 +38,6 @@ export const createDefaultEtablissement = async () => {
     label: "zone1",
     branche: branche._id,
   });
+  const parametre = await parametresModel.create({ etablissement: etablissement._id });
   return etablissement;
 };

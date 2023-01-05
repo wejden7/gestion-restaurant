@@ -1,131 +1,88 @@
-import React, { useState,memo} from "react";
+import React, { useState, memo } from "react";
 
 // * import Component
-import { ModalComponent } from "components";
-import { Input } from "components";
 
 // * import Hooks
 import useFormTeam from "Hooks/UseFormTeam";
-import useModel from "Hooks/useModel";
 
 // * import from api
 import { UseRefrecherCodeApi } from "utils/apis/team.api";
 
 // * import slice and react-redux
-import { useSelector, useDispatch } from "react-redux";
-import { getPostes, getBranches } from "state/SettingSlice";
+import { useDispatch } from "react-redux";
 import { deleteEmployer } from "state/TeamSlice";
 
 // * import react-spinners
 import BarLoader from "react-spinners/BarLoader";
-import GridLoader from "react-spinners/GridLoader";
+import FormInput from "../Form/FormInput";
+import ModelForm from "../Form/FormModel";
 
-function UpdateTeam({ dataTeam }) {
+import "./UpdateTeam.style.scss";
+
+const RefetcheCodeLogin = ({ id }) => {
+  const { isFetching, refetch, data } = UseRefrecherCodeApi(id);
+  return (
+    <button
+      onClick={refetch}
+      type="button"
+      className={`code-login `}
+      htmlFor="file-team"
+    >
+      <BarLoader className="grid" color="#8288c3" loading={isFetching} />
+      {!isFetching && (
+        <>
+          <span className="span-text">Refreche code login click hir :</span>
+          <span className="span-text-code">{data}</span>
+        </>
+      )}
+    </button>
+  );
+};
+
+const DeleteTeam = ({ id }) => {
   const dispatch = useDispatch();
-  const postes = useSelector(getPostes);
-  const Branches = useSelector(getBranches);
   const [isdelete, setIsDelete] = useState(false);
-  const { isFetching, refetch, data } = UseRefrecherCodeApi(dataTeam._id);
-  const { openModal, handleOpenModal, handleCloseModal } = useModel();
-  const { InputSelectLabel, InputText } = Input;
-  const { register, onSubmit, errors, isSubmitting, error, control } =
-    useFormTeam(dataTeam, true);
-
   const onDelete = async () => {
     setIsDelete(true);
-    await dispatch(deleteEmployer(dataTeam._id))
+    await dispatch(deleteEmployer(id))
       .unwrap()
       .then((t) => {
-        handleCloseModal();
         setIsDelete(false);
       })
       .catch((e) => setIsDelete(false));
   };
-
   return (
-    <>
-      <button onClick={handleOpenModal} className="btn-update-team">
-        update
-      </button>
-      <ModalComponent openModal={openModal} handleCloseModal={handleCloseModal}>
-        <div className="model-team">
-          <div className="model-team-header">
-            <h1 className="model-team-header-title">Update</h1>
+    <button onClick={onDelete} type="button" className="btn-delete">
+      {!isdelete ? "Delete" : <BarLoader color="#fefbd8" />}
+    </button>
+  );
+};
 
-            <button onClick={handleCloseModal}></button>
-          </div>
+const Form = ({ dataTeam }) => {
+  const { onSubmit, isSubmitting, error, ...other } = useFormTeam(
+    dataTeam,
+    true
+  );
+  return (
+    <form onSubmit={onSubmit} className="form">
+      <p className="text-error ">{error?.message}</p>
+      <FormInput useForm={other} />
+      <div className="section-btn">
+        <RefetcheCodeLogin id={dataTeam._id} />
+        <button type="submit" className="btn-save">
+          {!isSubmitting ? "Update" : <BarLoader color="#fefbd8" />}
+        </button>
+        <DeleteTeam id={dataTeam._id} />
+      </div>
+    </form>
+  );
+};
 
-          <form onSubmit={onSubmit} className="form">
-            <p className="text-error ">{error?.message}</p>
-            <InputText
-              register={register}
-              name="name"
-              errors={errors.name?.message}
-              icon="&#xf007;"
-            />
-            <InputSelectLabel
-              control={control}
-              data={postes}
-              name="post"
-              errors={errors.post?.message}
-            />
-            <InputSelectLabel
-              control={control}
-              data={Branches}
-              name="branche"
-              errors={errors.branche?.message}
-            />
-
-            <InputText
-              register={register}
-              name="userName"
-              errors={errors.userName?.message}
-              icon="&#xf007;"
-            />
-
-            <label className="label-group-time-work" htmlFor="">
-              Time Work :
-            </label>
-            <div className="input-group-time-work">
-              <InputText
-                register={register}
-                name="timeWork.start"
-                errors={errors.timeWork?.start?.message}
-                icon="&#xf251;"
-              />
-              <InputText
-                register={register}
-                name="timeWork.end"
-                errors={errors.timeWork?.end?.message}
-                icon="&#xf253;"
-              />
-            </div>
-
-            <button
-              onClick={refetch}
-              type="button"
-              className={`code-login }`}
-              htmlFor="file-team"
-            >
-              <span className="span-text">{data}</span>
-              <span className={`icon ${isFetching && "loading"}`}></span>
-              <GridLoader
-                className="grid"
-                color="#8288c3"
-                loading={isFetching}
-              />
-              <span className="span-text">Refreche code login click hir</span>
-            </button>
-            <button type="submit" className="btn-save">
-              {!isSubmitting ? "Update" : <BarLoader color="#fefbd8" />}
-            </button>
-            <button onClick={onDelete} type="button" className="btn-delete">
-              {!isdelete ? "Delete" : <BarLoader color="#fefbd8" />}
-            </button>
-          </form>
-        </div>
-      </ModalComponent>
-    </>
+function UpdateTeam({ dataTeam }) {
+  return (
+    <ModelForm titel="Update" btnContent="update" btnClass="btn-update-team">
+      <Form dataTeam={dataTeam} />
+    </ModelForm>
   );
 }
 

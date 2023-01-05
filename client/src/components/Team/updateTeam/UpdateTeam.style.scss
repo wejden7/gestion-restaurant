@@ -1,0 +1,20 @@
+@import "utils/styles/colors";
+
+
+.btn-update-team {
+  flex: 1;
+  font-size: 14px;
+  padding: 2px 0;
+  color: $color-primary;
+}
+.dashboard.dark{
+  .btn-update-team {
+  
+    color: whitesmoke;
+    border: 1px solid $color-light-opacity;
+    border-radius: 5px;
+    &:hover{
+      background-color: $color-light-opacity;
+    }
+  }
+}

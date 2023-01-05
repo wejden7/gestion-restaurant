@@ -1,0 +1,1 @@
+export {default as EtablissementEdite} from './EtablissementEdite/EtablissementEdite'

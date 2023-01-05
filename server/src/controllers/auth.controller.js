@@ -35,8 +35,12 @@ export const registerController = async (req, res, next) => {
     const etablissement = await createDefaultEtablissement();
     req.body.etablissement = etablissement._id;
     const newUser = await userModel.create(req.body);
-
-    const token = createToken(newUser);
+    const tokenObject = {
+      _id: newUser._id,
+      etablissement: newUser.etablissement._id,
+      role: "admin",
+    };
+    const token = createToken(tokenObject);
 
     return res.status(201).json({
       message: "User created successfully",
@@ -44,6 +48,7 @@ export const registerController = async (req, res, next) => {
       token: token,
     });
   } catch (error) {
+    console.log(error);
     next(error.message);
   }
 };

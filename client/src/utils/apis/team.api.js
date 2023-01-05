@@ -41,7 +41,7 @@ export async function deleteEmployerApi(id) {
 }
 export function UseRefrecherCodeApi(id) {
   const { isSuccess, isFetching, isError, refetch, data } = useQuery(
-    ["team"],
+    ["team",id],
     () =>
       new Promise((resolve, reject) => {
         api

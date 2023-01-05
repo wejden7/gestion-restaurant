@@ -27,6 +27,49 @@ const employerShema = mongoose.Schema({
     type: Date,
     required: true,
   },
+  cnss :{
+    type: String,
+    required: true,
+  },
+  cin :{
+    type: String,
+    required: true,
+  },
+  address:{
+    type: String,
+  },
+  rib:{
+    type: String,
+  },
+  salaryType: {
+    type: String,
+    required: true,
+    enum: ["month", "hour"],
+  },
+  salaryBase: {
+    type: mongoose.Types.Decimal128,
+    required: true,
+    get: getCosts
+  },
+  holiday: {
+    type: String,
+    required: true,
+    enum: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+  },
+  WorkHoursPerWeek: {
+    type: Number,
+    required: true,
+    min: [40, "min 40h per week"],
+    max: [48, "max 48h per week"],
+  },
   timeWork: {
     start: {
       type: Number,
@@ -52,8 +95,25 @@ const employerShema = mongoose.Schema({
     required: true,
     ref: "Branche",
   },
-});
-
+  familyStatus: {
+    status: {
+      type: String,
+      default: "Single",
+      enum: ["Single", "Married", "Divorced"],
+    },
+    enfant: [
+      {
+        age: Number,
+      },
+    ],
+  },
+},{toJSON: {getters: true}});
+function getCosts(value) {
+  if (typeof value !== 'undefined') {
+     return parseFloat(value.toString());
+  }
+  return value;
+};
 const employeeModel = mongoose.model("Employer", employerShema);
 
 export default employeeModel;

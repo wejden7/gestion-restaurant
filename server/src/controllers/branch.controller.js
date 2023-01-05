@@ -22,7 +22,7 @@ export const createBrancheController = async (req, res, next) => {
   const err = validationResult(req);
   if (!err.isEmpty()) return next(err.errors);
 
-  const { label, zones } = req.body;
+  const { label, adresse, tel, zones } = req.body;
 
   try {
     const etablissement = await etablissementByUser(req.user);
@@ -31,6 +31,8 @@ export const createBrancheController = async (req, res, next) => {
 
     const branche = await brancheModel.create({
       label: label,
+      adresse,
+      tel,
       etablissement: etablissement._id,
     });
 
@@ -60,11 +62,11 @@ export const updateBrancheController = async (req, res, next) => {
   const err = validationResult(req);
   if (!err.isEmpty()) return next(err.errors);
   const { id } = req.params;
-  const { label, zones } = req.body;
+  const { label, zones, adresse, tel } = req.body;
   try {
     const branche = await brancheModel.findByIdAndUpdate(
       id,
-      { label },
+      { label, adresse, tel },
       {
         new: true,
       }
@@ -82,6 +84,8 @@ export const updateBrancheController = async (req, res, next) => {
     const newObject = {
       _id: branche._id,
       label: branche.label,
+      adresse: branche.adresse,
+      tel: branche.tel,
       zones: zonesfind,
     };
     return res.status(200).json({
@@ -148,6 +152,8 @@ export const findBrancheByEtablissementController = async (req, res, next) => {
       const newObject = {
         _id: branche._id,
         label: branche.label,
+        adresse: branche.adresse,
+        tel: branche.tel,
         zones: zones,
       };
       resualt.push(newObject);

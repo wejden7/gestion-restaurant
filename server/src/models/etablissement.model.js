@@ -6,6 +6,21 @@ const etablissementShema = mongoose.Schema(
       type: String,
       required: true,
     },
+    pays: {
+      type: String,
+    },
+    ncnss: {
+      type: String,
+    },
+    matriculeFiscale: {
+      type: String,
+    },
+    registreCommerce: {
+      type: String,
+    },
+    rib: {
+      type: String,
+    },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
