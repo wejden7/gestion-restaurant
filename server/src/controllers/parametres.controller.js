@@ -1,5 +1,5 @@
 import parametresModel from "#models/parametres.model.js";
-
+import { etablissementByUser } from "#service/etablissement.service.js";
 
 export const handleError = async (error, req, res, next) => {
   return res.status(500).json({
@@ -10,9 +10,12 @@ export const handleError = async (error, req, res, next) => {
 };
 
 export const findContoller = async (req, res, next) => {
-  const { id } = req.params;
+  const { user } = req;
   try {
-    const parametres = await parametresModel.findById(id);
+    const { _id } = await etablissementByUser(user);
+    const parametres = await parametresModel.findOne({
+      etablissement: _id,
+    });
     return res.status(200).json({
       message: "",
       data: parametres,
@@ -23,12 +26,17 @@ export const findContoller = async (req, res, next) => {
 };
 
 export const updateContoller = async (req, res, next) => {
-  const { id } = req.params;
+  const { user } = req;
   try {
-    const parametres = await parametresModel.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const { _id } = await etablissementByUser(user);
+    const parametres = await parametresModel.findOneAndUpdate(
+      { etablissement: _id },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     return res.status(200).json({
       message: "",
       data: parametres,

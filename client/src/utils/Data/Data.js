@@ -81,3 +81,23 @@ export const familyStatus = [
     value: "Divorced",
   },
 ];
+export const forRetenue = [
+  {
+    label: "employer",
+    value: "employer",
+  },
+  {
+    label: "Salarie",
+    value: "Salarie",
+  },
+];
+export const categorieRetenue = [
+  {
+    label: "Salair Brut",
+    value: 1,
+  },
+  {
+    label: "Salire imposable",
+    value: 2,
+  },
+];

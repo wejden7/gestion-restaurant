@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { auth, landing, error, dashboard } from "pages";
 import { AuthLayout, LandingLayout, DashboardLayout } from "layouts";
-import { PreferanceDuCompte } from "components";
+import { PreferanceDuCompte, Parametre } from "components";
 export default createBrowserRouter([
   {
     path: "/",
@@ -35,7 +35,7 @@ export default createBrowserRouter([
             index: true,
             element: <PreferanceDuCompte />,
           },
-          { path: "code", element: <div>code</div> },
+          { path: "Parametre", element: <Parametre /> },
         ],
       },
     ],

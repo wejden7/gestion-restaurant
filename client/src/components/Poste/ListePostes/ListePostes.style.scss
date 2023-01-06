@@ -1,10 +1,10 @@
 @import "utils/styles/colors";
 .liste-postes-style {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
   .item-liste-postes {
-    width: 200px;
+  
     padding: 10px 0;
     border-radius: 5px;
     text-align: center;

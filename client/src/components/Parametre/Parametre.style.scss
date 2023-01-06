@@ -1,0 +1,75 @@
+@import "utils/styles/colors";
+.form-parametre {
+  height: 100%;
+  position: relative;
+  .form-parametre-containt {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 90%;
+    gap: 15px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8px;
+  }
+  .section-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .section-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .section {
+    display: grid;
+    gap: 8px;
+  }
+
+  .titel-section {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    & > h1 {
+      font-size: 18px;
+    }
+    & > button {
+      font-size: 12px;
+      color: $color-gray-100;
+      cursor: pointer;
+    }
+  }
+  .btn-retenue {
+    grid-column-start: 3;
+  }
+
+  .btn {
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+    min-height: 40px;
+    max-height: 40px;
+    border: 1px solid;
+    padding: 0px 16px;
+    &.btn-save {
+      width: max-content;
+      position: fixed;
+      right: 60px;
+      bottom: 20px;
+    }
+  }
+
+  .bonus-containt {
+    .text-input {
+      width: 300px;
+    }
+  }
+}

@@ -14,6 +14,7 @@ export { default as MapItem } from "./MapItem/MapItem.js";
 export { default as PresenceDetail } from "./PresenceDetail/PresenceDetail.js";
 export { default as Loder } from "./Loader/Loader.js";
 export { default as Presance } from "./Presance/Presance.js";
+export { default as Parametre } from "./Parametre/Parametre";
 export * as InputAuth from "./InputAuth/InputAuth";
 export * as Branche from "./Branche";
 export * as Poste from "./Poste";

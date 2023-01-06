@@ -9,6 +9,7 @@ import { DashboardSettingPath } from "utils/router/path.utils";
 import { fetchTeam } from "state/TeamSlice";
 import { findAutorization } from "state/AutorizationSlice";
 import { findBranche, findEtablissement, findPoste } from "state/SettingSlice";
+import { getParametre } from "state/ParametreSlice";
 import { store } from "state/store";
 
 let ButtonSeeting = () => {
@@ -33,6 +34,7 @@ function Dashboard(props) {
         store.dispatch(findPoste()),
         store.dispatch(fetchTeam()),
         store.dispatch(findAutorization()),
+        store.dispatch(getParametre()),
       ]);
 
     fetchedata().then(() => {

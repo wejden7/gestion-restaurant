@@ -22,7 +22,7 @@ import employerRouter from "#routes/employer.routes.js";
 import permissionTagsRouter from "#routes/permissionTags.routes.js";
 import presenceRouter from "#routes/presence.routes.js";
 import autorizationRouter from "#routes/autorization.routes.js";
-import parametresRouter from '#routes/parametres.routes.js';
+import parametresRouter from "#routes/parametres.routes.js";
 //* Setup Environment Variables
 dotenv.config();
 
@@ -51,11 +51,12 @@ const errorHandler = (error, req, res, next) => {
 app.use("/api/auth", authRouter);
 
 app.use("/api", auth);
-app.use("/api", parametresRouter);
+
 app.use("/api", etablissementRouter);
 app.use("/api", brancheRouter);
 app.use("/api", autorizationRouter);
 app.use("/api", AuthorizationMiddleware);
+app.use("/api", parametresRouter);
 app.use("/api", postRouter);
 app.use("/api", zoneRouter);
 app.use("/api", employerRouter);

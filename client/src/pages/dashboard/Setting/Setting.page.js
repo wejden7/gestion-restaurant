@@ -16,10 +16,10 @@ function Setting() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? activeClassName : undefined)}
-          to="code"
+          to="Parametre"
           end
         >
-          Identificationet et sécurité
+          Parametre
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? activeClassName : undefined)}

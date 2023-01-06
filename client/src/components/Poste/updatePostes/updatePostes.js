@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPostesById, deletePoste } from "state/SettingSlice";
 import { findPermissionTagsApi } from "utils/apis/poste.api";
 import "./updatePostes.style.scss";
-
+import { InputText } from "components/Input/Input";
 const PermissionListe = ({ register }) => {
   const { isSuccess, isFetching, isError, data } = useQuery(
     ["pemission"],
@@ -51,16 +51,14 @@ const UpdatePostes = ({ id ,handleCloseModal}) => {
   return (
       <div className="update-postes">
         <form onSubmit={onSubmit} className="form-group-update-post">
-          <label className="input-group" htmlFor="name-group">
-            <input
-              {...register("label")}
-              type="text"
-              id="name-group"
-              placeholder="Name de Poste"
-            />
-            <p className="error_input">{errors.label?.message}</p>
-          </label>
-
+         
+          <InputText
+          register={register}
+          name="label"
+          placeholder="Name de Poste"
+          icon="&#xf82f;"
+          errors={errors.label?.message}
+        />
           <PermissionListe register={register} />
           <div className="btn-group-update-postes">
             <button type="submit" className="btn btn-save-update-postes">
